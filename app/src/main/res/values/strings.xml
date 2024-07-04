@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">BNI</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Register</string>
+    <string name="welcome">Welcome Back !</string>
+    <string name="account_login">Login to your account</string>
+    <string name="account_register">Create your new account</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="number">Number</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="chapters">Chapters</string>
+    <string name="my_asks">My Asks</string>
+    <string name="my_gives">My Gives</string>
+    <string name="my_matches">My Matches</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="log_in">Log in</string>
+    <string name="mobile">mobile</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="company_name">Company Name</string>
+    <string name="dept_name">Dept Name</string>
+    <string name="message">Message</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="web_url">Web Url</string>
+
+    <string name="dummy_text">
+        There are many variations of passages of Lorem Ipsum available,
+        but the majority have suffered alteration in some form, by injected humour,
+        or randomised words which don\'t look even slightly believable.
+        If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything
+        embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to
+        repeat predefined chunks as necessary, making this the first true generator on the Internet.
+        It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,
+        to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from
+        repetition, injected humour, or non-characteristic words etc.
+</string>
+
+</resources>
