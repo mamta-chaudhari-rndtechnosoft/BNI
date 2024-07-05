@@ -12,60 +12,76 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/tvCompanyName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/company_name"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/black"
-            />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvDeptName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dept_name"
-            android:textStyle="italic"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/primary_color"
-            />
+            <TextView
+                android:id="@+id/tvCompanyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:text="@string/company_name"
+                android:textSize="16sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/tvDeptName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="@string/dept_name"
+                android:textColor="@color/primary_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="16sp"
             android:layout_marginBottom="4dp"
+            android:drawableStart="@drawable/baseline_email"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/light_black"
+            android:text="Email"
             android:textColor="@color/black"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phone"
-            android:textSize="16sp"
-            android:textColor="@color/black"
             android:layout_marginBottom="4dp"
-            />
+            android:drawableStart="@drawable/baseline_local_phone_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/green"
+            android:text="Phone"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Url"
-            android:textSize="16sp"
-            android:textColor="@color/black"
             android:layout_marginBottom="4dp"
-            />
+            android:drawableStart="@drawable/baseline_insert_link_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/blue"
+            android:text="Url"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>
