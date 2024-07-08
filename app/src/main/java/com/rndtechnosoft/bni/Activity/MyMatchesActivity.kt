@@ -23,8 +23,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyMatchesActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMyMatchesBinding
-    //private lateinit var viewModel: MyMatchViewModel
+    private lateinit var viewModel: MyMatchViewModel
     private lateinit var adapter: MyMatchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,21 +33,19 @@ class MyMatchesActivity : AppCompatActivity() {
         binding = ActivityMyMatchesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Toast.makeText(this@MyMatchesActivity,"Hello",Toast.LENGTH_SHORT).show()
-
-
+       // Toast.makeText(this@MyMatchesActivity,"Hello",Toast.LENGTH_SHORT).show()
         //viewModel = ViewModelProvider(this@MyMatchesActivity)[MyMatchViewModel::class.java]
 
         binding.rvMyMatch.layoutManager = LinearLayoutManager(this)
 
-        getMyAllMatch()
+        //getMyAllMatch()
 
         val token: String? = SaveSharedPreference.getInstance(this@MyMatchesActivity).getToken()
         val userId: String? = SaveSharedPreference.getInstance(this@MyMatchesActivity).getUserId()
 
-        /*viewModel.setMyAllMatch(token!!, userId!!)
+       // viewModel.setMyAllMatch(token!!, userId!!)
 
-        viewModel.getMyAllMatch().observe(this@MyMatchesActivity, Observer {
+     /*   viewModel.getMyAllMatch().observe(this@MyMatchesActivity, Observer {
             adapter = MyMatchAdapter(this@MyMatchesActivity, it)
             binding.rvMyMatch.adapter = adapter
         })
@@ -54,9 +53,10 @@ class MyMatchesActivity : AppCompatActivity() {
         viewModel.getErrorData().observe(this@MyMatchesActivity, Observer {
             Toast.makeText(this@MyMatchesActivity, "Error: $it", Toast.LENGTH_SHORT).show()
             Log.d("Api Response", "Error: $it")
-        })*/
+        })
+     */
 
-        //myAllMatchList()
+        myAllMatchList()
 
 
     }
@@ -66,7 +66,7 @@ class MyMatchesActivity : AppCompatActivity() {
         val token: String? = SaveSharedPreference.getInstance(this@MyMatchesActivity).getToken()
         val userId: String? = SaveSharedPreference.getInstance(this@MyMatchesActivity).getUserId()
 
-        /*viewModel.setMyAllMatch(token!!, userId!!)
+        viewModel.setMyAllMatch(token!!, userId!!)
 
         viewModel.getMyAllMatch().observe(this@MyMatchesActivity, Observer {
             adapter = MyMatchAdapter(this@MyMatchesActivity, it)
@@ -76,13 +76,13 @@ class MyMatchesActivity : AppCompatActivity() {
         viewModel.getErrorData().observe(this@MyMatchesActivity, Observer {
             Toast.makeText(this@MyMatchesActivity, "Error: $it", Toast.LENGTH_SHORT).show()
             Log.d("Api Response", "Error: $it")
-        })*/
+        })
 
     }
 
-    private fun getMyAllMatch(){
+   /* private fun getMyAllMatch(){
 
-        val token: String? = SaveSharedPreference.getInstance(this@MyMatchesActivity).getToken()
+        val token: String? =  "bearer " + SaveSharedPreference.getInstance(this@MyMatchesActivity).getToken()
         val userId: String? = SaveSharedPreference.getInstance(this@MyMatchesActivity).getUserId()
 
         RetrofitInstance.apiInterface.myAllMatches(token!!,userId).enqueue(object : Callback<MyAllMatchesResponseData?> {
@@ -107,6 +107,6 @@ class MyMatchesActivity : AppCompatActivity() {
                 Toast.makeText(this@MyMatchesActivity,"Error: ${t.localizedMessage}",Toast.LENGTH_SHORT).show()
             }
         })
-    }
+    }*/
 
 }

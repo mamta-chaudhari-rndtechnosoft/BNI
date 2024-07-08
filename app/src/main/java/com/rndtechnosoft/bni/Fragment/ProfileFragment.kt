@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.rndtechnosoft.bni.R
+import com.rndtechnosoft.bni.ViewModel.ManageProfileViewModel
+
 import com.rndtechnosoft.bni.databinding.FragmentProfileBinding
 
 
@@ -20,6 +22,8 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private var selectedBannerImageUri: Uri? = null
     private var selectedProfileImageUri:Uri? = null
+    private lateinit var viewModel: ManageProfileViewModel
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -114,5 +118,13 @@ class ProfileFragment : Fragment() {
 
 
         }
+    }
+
+    fun updateProfileImage(){
+
+    }
+
+    fun updateBannerImage(){
+
     }
 }

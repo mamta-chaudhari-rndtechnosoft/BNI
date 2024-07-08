@@ -39,7 +39,7 @@ class MyMatchByDepartmentAndCompany : AppCompatActivity() {
         companyName = intent.getStringExtra("companyName")
         deptName = intent.getStringExtra("dept")
         userId = SaveSharedPreference.getInstance(this@MyMatchByDepartmentAndCompany).getUserId()
-        token = SaveSharedPreference.getInstance(this@MyMatchByDepartmentAndCompany).getToken()
+        token = "bearer " + SaveSharedPreference.getInstance(this@MyMatchByDepartmentAndCompany).getToken()
 
 
         myMatchByDepartment()

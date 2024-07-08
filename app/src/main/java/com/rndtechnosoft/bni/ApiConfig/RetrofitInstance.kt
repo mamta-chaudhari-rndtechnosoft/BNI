@@ -13,7 +13,6 @@ object RetrofitInstance {
 
     private const val BASE_URL = "http://192.168.0.181:3002"
 
-
     private val gson = GsonBuilder().setLenient().create()
 
     private val retrofit by lazy {

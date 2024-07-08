@@ -24,6 +24,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        var token:String? = SaveSharedPreference.getInstance(this@MainActivity).getToken()
+        var userId:String? = SaveSharedPreference.getInstance(this@MainActivity).getUserId()
+
+        //Toast.makeText(this@MainActivity,"token: $token  userId:$userId",Toast.LENGTH_SHORT).show()
+
+        Log.d("Api Response","token: $token  userId:$userId")
+
+
         loadFragment(HomeFragment())
 
         binding.bottomNav.setOnItemSelectedListener {

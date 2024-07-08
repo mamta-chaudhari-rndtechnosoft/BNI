@@ -15,12 +15,18 @@ import com.rndtechnosoft.bni.Model.MyGivesResponseData
 import com.rndtechnosoft.bni.Model.MyMatchByCompaniesResponseData
 import com.rndtechnosoft.bni.Model.RegisterResponseData
 import com.rndtechnosoft.bni.Model.RegisterUserBody
+import com.rndtechnosoft.bni.Model.UpdateProfileBannerImageResponseData
+import com.rndtechnosoft.bni.Model.UpdateProfileImageResponseData
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiInterface {
@@ -80,5 +86,36 @@ interface ApiInterface {
         @Query("companyName") companyName: String?,
         @Query("dept") department: String?
     ): Call<MyMatchByCompaniesResponseData>
+
+    @Multipart
+    @PUT("business/updateImg")
+    fun updateProfileImage(
+        @Header("authorization") authorization: String,
+        @Part("profileImg") profileImage: RequestBody?
+    ): Call<UpdateProfileImageResponseData>
+
+    @Multipart
+    @PUT("business/updateImg")
+    fun updateBanner(
+        @Header("authorization") authorization: String,
+        @Part("bannerImg") bannerImage: RequestBody?
+    ): Call<UpdateProfileBannerImageResponseData>
+
+
+    /*
+    @Multipart
+    @POST("customer_kyc")
+    fun customerKyc(
+        @Part("id") id: RequestBody,
+        @Part("bank_name") bankName: RequestBody,
+        @Part("account_no") accountNumber: RequestBody,
+        @Part("ifsc") ifsc: RequestBody,
+        @Part("aadhar_card") imageAadhaar: RequestBody?,
+        @Part("aadharcard_back_image") imageAadhaarBack: RequestBody?,
+        @Part("pan_card") imagePan: RequestBody?,
+        @Part("passbook_image") imagePassBook: RequestBody?,
+        @Part("cheque_image") imageCheque: RequestBody?
+    ): Call<ResponseBody>
+    */
 
 }
