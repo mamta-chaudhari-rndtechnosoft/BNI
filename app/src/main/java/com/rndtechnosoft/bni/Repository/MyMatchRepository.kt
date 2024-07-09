@@ -5,7 +5,6 @@ import com.rndtechnosoft.bni.ApiConfig.RetrofitInstance
 import com.rndtechnosoft.bni.Model.Data
 import com.rndtechnosoft.bni.Model.MatchedCompany
 import com.rndtechnosoft.bni.Model.MyAllMatchesResponseData
-import com.rndtechnosoft.bni.Model.MyGives
 import com.rndtechnosoft.bni.Model.MyMatchByCompaniesResponseData
 import retrofit2.Call
 import retrofit2.Callback

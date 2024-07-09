@@ -43,7 +43,7 @@ class ManageProfileRepository {
         return responseValue
     }
 
-    fun updateBanner(
+   /* fun updateBanner(
         token: String,
         bannerImage: RequestBody
     ): MutableLiveData<Result<UpdateProfileBannerImageResponseData>> {
@@ -70,7 +70,7 @@ class ManageProfileRepository {
             })
 
         return responseValue
-    }
+    }*/
 
     fun getErrorLiveData(): MutableLiveData<String> {
         return errorLiveData

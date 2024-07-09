@@ -20,11 +20,11 @@ class ManageProfileViewModel : ViewModel() {
         }
     }
 
-    fun updateBannerImage(token:String,imageBanner:RequestBody){
+    /*fun updateBannerImage(token:String,imageBanner:RequestBody){
         manageProfileRepository.updateBanner(token,imageBanner).observeForever {
             updateBannerImage.value = it
         }
-    }
+    }*/
 
     fun observeUpdateProfileImage():MutableLiveData<Result<UpdateProfileImageResponseData>>{
         return updateProfileImage

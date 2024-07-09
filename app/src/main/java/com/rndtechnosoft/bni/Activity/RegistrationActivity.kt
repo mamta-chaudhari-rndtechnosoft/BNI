@@ -3,23 +3,16 @@ package com.rndtechnosoft.bni.Activity
 import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.rndtechnosoft.bni.ApiConfig.RetrofitInstance
-import com.rndtechnosoft.bni.Model.CountryData
-import com.rndtechnosoft.bni.Model.CountryResponse
+
 import com.rndtechnosoft.bni.Model.RegisterUserBody
 import com.rndtechnosoft.bni.ViewModel.RegistrationViewModel
 import com.rndtechnosoft.bni.databinding.ActivityRegistrationBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class RegistrationActivity : AppCompatActivity() {
 

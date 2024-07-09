@@ -7,6 +7,7 @@ import com.rndtechnosoft.bni.Model.AddMyGivesResponseData
 import com.rndtechnosoft.bni.Model.ChapterResponse
 import com.rndtechnosoft.bni.Model.CityResponse
 import com.rndtechnosoft.bni.Model.CountryResponse
+import com.rndtechnosoft.bni.Model.IndustryResponseData
 import com.rndtechnosoft.bni.Model.LoginBody
 import com.rndtechnosoft.bni.Model.LoginResponseData
 import com.rndtechnosoft.bni.Model.MyAllMatchesResponseData
@@ -98,24 +99,25 @@ interface ApiInterface {
     @PUT("business/updateImg")
     fun updateBanner(
         @Header("authorization") authorization: String,
+        @Query("id") userId: String?,
         @Part("bannerImg") bannerImage: RequestBody?
     ): Call<UpdateProfileBannerImageResponseData>
 
 
-    /*
     @Multipart
-    @POST("customer_kyc")
-    fun customerKyc(
-        @Part("id") id: RequestBody,
-        @Part("bank_name") bankName: RequestBody,
-        @Part("account_no") accountNumber: RequestBody,
-        @Part("ifsc") ifsc: RequestBody,
-        @Part("aadhar_card") imageAadhaar: RequestBody?,
-        @Part("aadharcard_back_image") imageAadhaarBack: RequestBody?,
-        @Part("pan_card") imagePan: RequestBody?,
-        @Part("passbook_image") imagePassBook: RequestBody?,
-        @Part("cheque_image") imageCheque: RequestBody?
+    @POST("business/create")
+    fun createBusiness(
+        @Header("authorization") authorization: String,
+        @Part("designation") designation: RequestBody,
+        @Part("aboutCompany") aboutCompany: RequestBody,
+        @Part("companyAddress") companyAddress: RequestBody,
+        @Part("contactLinks[whatsapp]") whatsAppContactLink: RequestBody
     ): Call<ResponseBody>
-    */
+
+
+    @GET("industry/getAllIndustry")
+    fun getAllIndustry():Call<IndustryResponseData>
+
+
 
 }

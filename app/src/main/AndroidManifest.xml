@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.EditProfileContactDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddWorkActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MyMatchByDepartmentAndCompany"
             android:exported="false" />
         <activity
