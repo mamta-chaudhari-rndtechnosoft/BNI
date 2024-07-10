@@ -4,8 +4,10 @@ import com.rndtechnosoft.bni.Model.AddMyAskBody
 import com.rndtechnosoft.bni.Model.AddMyAskResponseData
 import com.rndtechnosoft.bni.Model.AddMyGivesBody
 import com.rndtechnosoft.bni.Model.AddMyGivesResponseData
+import com.rndtechnosoft.bni.Model.BusinessListResponseData
 import com.rndtechnosoft.bni.Model.ChapterResponse
 import com.rndtechnosoft.bni.Model.CityResponse
+import com.rndtechnosoft.bni.Model.ContactLinksProfileBody
 import com.rndtechnosoft.bni.Model.CountryResponse
 import com.rndtechnosoft.bni.Model.IndustryResponseData
 import com.rndtechnosoft.bni.Model.LoginBody
@@ -18,6 +20,7 @@ import com.rndtechnosoft.bni.Model.RegisterResponseData
 import com.rndtechnosoft.bni.Model.RegisterUserBody
 import com.rndtechnosoft.bni.Model.UpdateProfileBannerImageResponseData
 import com.rndtechnosoft.bni.Model.UpdateProfileImageResponseData
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -100,7 +103,7 @@ interface ApiInterface {
     fun updateBanner(
         @Header("authorization") authorization: String,
         @Query("id") userId: String?,
-        @Part("bannerImg") bannerImage: RequestBody?
+        @Part image: MultipartBody.Part,
     ): Call<UpdateProfileBannerImageResponseData>
 
 
@@ -116,8 +119,15 @@ interface ApiInterface {
 
 
     @GET("industry/getAllIndustry")
-    fun getAllIndustry():Call<IndustryResponseData>
+    fun getAllIndustry(): Call<IndustryResponseData>
 
+    @PUT("business/updateContactLinks")
+    fun updateContactLinks(
+        @Header("authorization") authorization: String,
+        @Body contactLinksProfileBody: ContactLinksProfileBody
+    ): Call<ResponseBody>
 
+    @GET("business/businesssList")
+    fun businessList( @Header("authorization") authorization: String):Call<List<BusinessListResponseData>>
 
 }

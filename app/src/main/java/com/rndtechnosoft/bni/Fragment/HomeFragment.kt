@@ -41,6 +41,7 @@ class HomeFragment : Fragment() {
         }
         binding.cardMatches.setOnClickListener {
             startActivity(Intent(requireContext(), MyMatchesActivity::class.java))
+            //startActivity(Intent(requireContext(), CompanyActivity::class.java))
         }
 
 
