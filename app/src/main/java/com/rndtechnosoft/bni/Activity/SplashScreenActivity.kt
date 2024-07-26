@@ -28,8 +28,9 @@ class SplashScreenActivity : AppCompatActivity() {
             if (userId == "") {
                 startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
                 finish()
+            }
 
-            } else {
+            else {
                 startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                 finish()
             }

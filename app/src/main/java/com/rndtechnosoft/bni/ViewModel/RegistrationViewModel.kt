@@ -31,16 +31,16 @@ class RegistrationViewModel : ViewModel() {
         return countriesLiveData
     }
 
-    fun getCity() {
-        repository.getCity().observeForever { cityLiveData.value = it }
+    fun getCity(countryName:String) {
+        repository.getCity(countryName).observeForever { cityLiveData.value = it }
     }
 
     fun observeCityLiveData(): MutableLiveData<List<CityData>> {
         return cityLiveData
     }
 
-    fun getChapter() {
-        repository.getChapter().observeForever { chapterLiveData.value = it }
+    fun getChapter(cityName:String) {
+        repository.getChapter(cityName).observeForever { chapterLiveData.value = it }
     }
 
     fun observeChapterLiveData(): MutableLiveData<List<ChapterData>> {

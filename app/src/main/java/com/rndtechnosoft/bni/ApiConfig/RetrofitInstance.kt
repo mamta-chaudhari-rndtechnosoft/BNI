@@ -11,7 +11,8 @@ object RetrofitInstance {
 
     //ip a
 
-    private const val BASE_URL = "http://192.168.0.181:3002"
+    private const val BASE_URL = "http://bconn.rndtechnosoft.com/"
+    //private const val BASE_URL = "https://bni-backend-w2c1.onrender.com/"
 
     private val gson = GsonBuilder().setLenient().create()
 

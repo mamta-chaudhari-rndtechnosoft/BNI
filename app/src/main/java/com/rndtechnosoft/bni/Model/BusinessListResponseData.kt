@@ -4,5 +4,6 @@ package com.rndtechnosoft.bni.Model
 
 data class BusinessListResponseData(
     val _id: String,
-    val industryName: String
+    val industryName: String,
+    val companyName:String
 )

@@ -40,6 +40,7 @@ class RegistrationRepository private constructor() {
                 response: Response<CountryResponse?>
             ) {
                 if (response.isSuccessful) {
+
                     /* response.body()?.let {
                          data.value = it.countryData
 
@@ -62,10 +63,10 @@ class RegistrationRepository private constructor() {
         return data
     }
 
-    fun getCity(): MutableLiveData<List<CityData>> {
+    fun getCity(countryName:String): MutableLiveData<List<CityData>> {
         val data = MutableLiveData<List<CityData>>()
 
-        apiInterface.getCity().enqueue(object : Callback<CityResponse?> {
+        apiInterface.getCity(countryName).enqueue(object : Callback<CityResponse?> {
             override fun onResponse(call: Call<CityResponse?>, response: Response<CityResponse?>) {
                 if (response.isSuccessful) {
                     data.value = response.body()!!.cityData
@@ -81,9 +82,9 @@ class RegistrationRepository private constructor() {
         return data
     }
 
-    fun getChapter(): MutableLiveData<List<ChapterData>> {
+    fun getChapter(cityName:String): MutableLiveData<List<ChapterData>> {
         val data = MutableLiveData<List<ChapterData>>()
-        apiInterface.getChapter().enqueue(object : Callback<ChapterResponse?> {
+        apiInterface.getChapter(cityName).enqueue(object : Callback<ChapterResponse?> {
             override fun onResponse(
                 call: Call<ChapterResponse?>,
                 response: Response<ChapterResponse?>

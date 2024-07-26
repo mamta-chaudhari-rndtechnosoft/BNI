@@ -39,12 +39,12 @@ interface ApiInterface {
     fun getCountry(): Call<CountryResponse>
 
     //later do with id
-    @GET("city/getCity")
-    fun getCity(): Call<CityResponse>
+    @GET("city/getCityByCountry")
+    fun getCity(@Query("countryName") countryName: String): Call<CityResponse>
 
     //later do with id
-    @GET("chapter/getchapter")
-    fun getChapter(): Call<ChapterResponse>
+    @GET("chapter/getChapterByCity")
+    fun getChapter(@Query("city") city: String): Call<ChapterResponse>
 
     @POST("member/register")
     fun userRegister(@Body registerUserBody: RegisterUserBody): Call<RegisterResponseData>
@@ -76,7 +76,6 @@ interface ApiInterface {
         @Query("userId") userId: String?
     ): Call<MyGivesResponseData>
 
-
     @GET("match2/myAllMatches")
     fun myAllMatches(
         @Header("authorization") authorization: String,
@@ -99,13 +98,12 @@ interface ApiInterface {
     ): Call<UpdateProfileImageResponseData>
 
     @Multipart
-    @PUT("business/updateImg")
+    @PUT("business/updateBusinessById")
     fun updateBanner(
         @Header("authorization") authorization: String,
         @Query("id") userId: String?,
         @Part image: MultipartBody.Part,
     ): Call<UpdateProfileBannerImageResponseData>
-
 
     @Multipart
     @POST("business/create")
@@ -117,7 +115,6 @@ interface ApiInterface {
         @Part("contactLinks[whatsapp]") whatsAppContactLink: RequestBody
     ): Call<ResponseBody>
 
-
     @GET("industry/getAllIndustry")
     fun getAllIndustry(): Call<IndustryResponseData>
 
@@ -128,6 +125,6 @@ interface ApiInterface {
     ): Call<ResponseBody>
 
     @GET("business/businesssList")
-    fun businessList( @Header("authorization") authorization: String):Call<List<BusinessListResponseData>>
+    fun businessList(@Header("authorization") authorization: String): Call<List<BusinessListResponseData>>
 
 }

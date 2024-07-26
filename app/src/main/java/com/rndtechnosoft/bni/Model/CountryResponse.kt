@@ -15,6 +15,7 @@ data class CountryData(
     val __v: Int,
     val _id: String,
     val createdAt: String,
+    val short_name:String,
     val name: String,
     val photo: List<String>,
     val updatedAt: String

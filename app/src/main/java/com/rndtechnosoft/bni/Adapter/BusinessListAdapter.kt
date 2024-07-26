@@ -28,7 +28,7 @@ class BusinessListAdapter(
             }
 
             binding.tvIndustry.text = businessData.industryName
-            binding.tvCompany.text =  "Company Name"
+            binding.tvCompany.text =  businessData.companyName
         }
     }
 

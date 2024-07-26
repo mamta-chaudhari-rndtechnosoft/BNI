@@ -249,7 +249,8 @@ class ProfileFragment : Fragment() {
 
         val token: String? =
             "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
-        val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
+        //val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
+        val userId:String? = "668e5525302bc003f5cc8c8d"
         /*var prefixedImageBase64:String? = null
 
         val imageBannerRequestBody: RequestBody? = uriBanner?.let { uri ->
@@ -272,7 +273,7 @@ class ProfileFragment : Fragment() {
 
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
         val imagePart =
-            MultipartBody.Part.createFormData("bannerImage", imageFile.name, requestFile)
+            MultipartBody.Part.createFormData("bannerImg", imageFile.name, requestFile)
 
 
         RetrofitInstance.apiInterface.updateBanner(token!!, userId, imagePart)
@@ -294,6 +295,14 @@ class ProfileFragment : Fragment() {
                             "Response Error: ${response.code()}",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        Toast.makeText(
+                            requireContext(),
+                            "Response Error: ${call.request().url}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        Log.d("Api Response","URL: ${call.request().url}")
                     }
                 }
 

@@ -19,7 +19,6 @@
         app:titleCentered="true"
         android:background="@color/secondary_color"
         app:navigationIconTint="@color/white"
-
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -81,6 +80,7 @@
         android:layout_marginTop="12dp"
         android:text="Add My Ask"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
 </LinearLayout>
