@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -56,8 +55,8 @@
                 app:boxCornerRadiusBottomStart="18dp"
                 app:boxCornerRadiusTopEnd="18dp"
                 app:boxCornerRadiusTopStart="18dp"
-                app:startIconDrawable="@drawable/baseline_person"
-                app:startIconTint="@color/black">
+                app:startIconDrawable="@drawable/outline_person_24"
+                app:startIconTint="@color/primary_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -77,8 +76,8 @@
                 app:boxCornerRadiusBottomStart="18dp"
                 app:boxCornerRadiusTopEnd="18dp"
                 app:boxCornerRadiusTopStart="18dp"
-                app:startIconDrawable="@drawable/baseline_email"
-                app:startIconTint="@color/black">
+                app:startIconDrawable="@drawable/outline_email_24"
+                app:startIconTint="@color/primary_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -99,8 +98,8 @@
                 app:boxCornerRadiusBottomStart="18dp"
                 app:boxCornerRadiusTopEnd="18dp"
                 app:boxCornerRadiusTopStart="18dp"
-                app:startIconDrawable="@drawable/baseline_phone_android"
-                app:startIconTint="@color/black">
+                app:startIconDrawable="@drawable/outline_phone_24"
+                app:startIconTint="@color/primary_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -132,7 +131,7 @@
                 android:popupBackground="@color/white"
                 android:spinnerMode="dropdown" />
 
-            <Spinner
+           <!-- <Spinner
                 android:id="@+id/spinnerChapter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,8 +140,29 @@
                 android:background="@drawable/border_spinner"
                 android:padding="15dp"
                 android:popupBackground="@color/white"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown" />-->
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etReferralCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Referral Code"
+                app:boxBackgroundColor="@color/light_red"
+                app:boxCornerRadiusBottomEnd="18dp"
+                app:boxCornerRadiusBottomStart="18dp"
+                app:boxCornerRadiusTopEnd="18dp"
+                app:boxCornerRadiusTopStart="18dp"
+                app:startIconDrawable="@drawable/outline_members_24"
+                app:startIconTint="@color/primary_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etPassword"
@@ -157,7 +177,7 @@
                 app:boxCornerRadiusTopEnd="18dp"
                 app:boxCornerRadiusTopStart="18dp"
                 app:startIconDrawable="@drawable/baseline_lock"
-                app:startIconTint="@color/black">
+                app:startIconTint="@color/primary_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -179,7 +199,7 @@
                 app:boxCornerRadiusTopEnd="18dp"
                 app:boxCornerRadiusTopStart="18dp"
                 app:startIconDrawable="@drawable/baseline_lock"
-                app:startIconTint="@color/black">
+                app:startIconTint="@color/primary_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -188,7 +208,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
+           <!-- <TextView
                android:id="@+id/tvAddKeyWords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -197,7 +217,7 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
-                />
+                />-->
 
 
             <com.google.android.material.button.MaterialButton
@@ -236,4 +256,27 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <!--<ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />-->
+
+    <FrameLayout
+        android:id="@+id/layoutProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@color/black"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress_indeternimate" />
+
+    </FrameLayout>
+
+</RelativeLayout>

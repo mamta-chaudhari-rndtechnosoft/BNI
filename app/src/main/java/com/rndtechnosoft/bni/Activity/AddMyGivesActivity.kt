@@ -65,7 +65,6 @@ class AddMyGivesActivity : AppCompatActivity() {
                 }
             }
 
-
         })
 
         binding.btnAddGives.setOnClickListener {

@@ -12,13 +12,19 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Add Keywords"
-        app:titleCentered="true"
-        app:titleTextColor="@color/white"
+        android:background="@color/primary_color"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
         app:navigationIconTint="@color/white"
-        android:background="@color/primary_color"
-        />
+        app:title="Add Keywords"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
+
+    <!-- Content Area -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,14 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:text="@string/add_keywords"
-            android:visibility="gone"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
             <EditText
@@ -49,32 +55,44 @@
                 android:layout_weight="1"
                 android:background="@drawable/et_border"
                 android:hint="Enter Keywords"
-                android:padding="15dp"
-                />
+                android:padding="15dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddKeyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
                 android:layout_marginHorizontal="0dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight="0"
+                android:padding="15dp"
                 android:text="Add"
                 app:cornerRadius="12dp"
                 app:icon="@drawable/baseline_add_circle_"
-                app:iconSize="20dp"
-                android:padding="15dp"
-                />
+                app:iconSize="20dp" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/rvKeyword"
+            android:id="@+id/rvKeyword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="8dp"
-            />
+            android:layout_marginTop="8dp" />
 
     </LinearLayout>
+
+
+    </ScrollView>
+
+    <!-- Button at the bottom -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddAllKeyWords"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:text="Add All Keywords"
+        android:textSize="18sp"
+        app:cornerRadius="0dp" />
+
 
 </LinearLayout>

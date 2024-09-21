@@ -7,6 +7,5 @@ data class RegisterUserBody(
     val password: String,
     val confirm_password: String,
     val country: String,
-    val city: String,
-    val chapter: String
+    val city: String
 )

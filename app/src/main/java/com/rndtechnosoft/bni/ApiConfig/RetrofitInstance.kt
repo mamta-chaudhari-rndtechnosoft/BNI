@@ -6,13 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    //private const val BASE_URL = "https://newsapi.org/v2/"
-    //private const val BASE_URL = "localhost:3002/"
 
-    //ip a
-
-    private const val BASE_URL = "http://bconn.rndtechnosoft.com/"
-    //private const val BASE_URL = "https://bni-backend-w2c1.onrender.com/"
+    private const val BASE_URL = "http://bconn.rndtechnosoft.com/api/"
 
     private val gson = GsonBuilder().setLenient().create()
 
