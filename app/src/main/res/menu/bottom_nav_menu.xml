@@ -2,9 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-    android:id="@+id/home"
+    android:id="@+id/myAsk"
     android:icon="@drawable/baseline_home_filled_24"
-    android:title="Home" />
+    android:title="My Ask" />
+
+    <item
+        android:id="@+id/myGive"
+        android:icon="@drawable/baseline_home_filled_24"
+        android:title="My Give" />
+
+    <item
+        android:id="@+id/myMatch"
+        android:icon="@drawable/baseline_home_filled_24"
+        android:title="My Match" />
 
     <item android:id="@+id/profile"
         android:icon="@drawable/baseline_person"

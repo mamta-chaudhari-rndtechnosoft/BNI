@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    //alias(libs.plugins.googleServices)
 }
 
 android {
-    namespace = "com.rndtechnosoft.bni"
+    namespace = "com.rndtechnosoft.bconn"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.rndtechnosoft.bni"
+        applicationId = "com.rndtechnosoft.bconn"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
@@ -56,6 +57,14 @@ dependencies {
 
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.imagepicker)
+
+    /*implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.messaging.ktx)*/
+
+    //implementation(libs.firebase.bom)
+    //implementation("com.google.firebase:firebase-analytics")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

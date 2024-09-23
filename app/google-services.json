@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "224063087515",
+    "project_id": "b-conn-d5f33",
+    "storage_bucket": "b-conn-d5f33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224063087515:android:cdd61434694282d7bcf73e",
+        "android_client_info": {
+          "package_name": "com.rndtechnosoft.bconn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANTULo0NKFxDLonFn_5p7oCxb3db2J5nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
