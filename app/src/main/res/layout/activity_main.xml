@@ -23,7 +23,6 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemIconTint="@color/icon_color"
         app:itemTextColor="@color/icon_text_color"
         android:elevation="20dp"
         app:menu="@menu/bottom_nav_menu"
@@ -33,5 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+<!--    app:itemIconTint="@color/icon_color"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

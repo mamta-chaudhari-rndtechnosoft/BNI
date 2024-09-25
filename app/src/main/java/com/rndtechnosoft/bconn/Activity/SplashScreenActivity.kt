@@ -21,21 +21,58 @@ class SplashScreenActivity : AppCompatActivity() {
 
         handler.postDelayed({
 
-            //startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
-            //finish()
+            // startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+            // finish()
+            val approveByAdmin: String? =
+                SaveSharedPreference.getInstance(this@SplashScreenActivity).getAdminApproveStatus()
+            val approveByMember: String? =
+                SaveSharedPreference.getInstance(this@SplashScreenActivity).getMemberApproveStatus()
+            val userId: String? =
+                SaveSharedPreference.getInstance(this@SplashScreenActivity).getUserId()
 
-            /*val userId: String? = SaveSharedPreference.getInstance(this@SplashScreenActivity).getUserId()
+          /*  var intent: Intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()*/
+
             if (userId == "") {
-                startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                val intent: Intent = Intent(this@SplashScreenActivity, LoginActivity::class.java)
+                intent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 finish()
+            } else {
+                if (approveByAdmin == "pending" && approveByMember == "pending") {
+                    val intent: Intent =
+                        Intent(this@SplashScreenActivity, ThankYouActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                } else if (approveByAdmin == "pending" && approveByMember == "approved") {
+                    val intent: Intent =
+                        Intent(this@SplashScreenActivity, ThankYouActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                } else if(approveByAdmin == "pending" && approveByMember == "cancel"){
+                    val intent: Intent =
+                        Intent(this@SplashScreenActivity, ThankYouActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
+                else {
+                    var intent: Intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
             }
-            else {
-                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-                finish()
-            }*/
-
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-            finish()
 
         }, 2000)
 

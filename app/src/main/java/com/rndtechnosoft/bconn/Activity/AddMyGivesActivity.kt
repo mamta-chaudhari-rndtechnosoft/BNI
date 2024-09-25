@@ -5,23 +5,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
 import com.rndtechnosoft.bconn.Model.AddMyGivesBody
 import com.rndtechnosoft.bconn.Model.AddMyGivesResponseData
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
-import com.rndtechnosoft.bconn.ViewModel.MyGivesViewModel
 import com.rndtechnosoft.bconn.databinding.ActivityAddMyGivesBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class AddMyGivesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddMyGivesBinding
     //private lateinit var myGivesViewModel: MyGivesViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddMyGivesBinding.inflate(layoutInflater)
@@ -83,25 +80,27 @@ class AddMyGivesActivity : AppCompatActivity() {
         val token: String? =
             "bearer " + SaveSharedPreference.getInstance(this@AddMyGivesActivity).getToken()
 
+        val userId:String? = SaveSharedPreference.getInstance(this@AddMyGivesActivity).getUserId()
+
         val companyName = binding.etCompany.editText?.text.toString()
         val deptName = binding.etDepartment.editText?.text.toString()
         val companyEmail = binding.etCompanyEmail.editText?.text.toString()
         val companyPhoneNumber = binding.etCompanyPhone.editText?.text.toString()
         val companyUrl = binding.etWebUrl.editText?.text.toString()
 
-        val addMyGives =
-            AddMyGivesBody(companyName, deptName, companyEmail, companyPhoneNumber, companyUrl)
+        val addMyGives = AddMyGivesBody(companyName, deptName, companyEmail, companyPhoneNumber, companyUrl)
 
         //myGivesViewModel.addMyGivesResult(addMyGives, token!!)
 
-        RetrofitInstance.apiInterface.addMyGives(token!!,addMyGives).enqueue(object : Callback<AddMyGivesResponseData?> {
+        RetrofitInstance.apiInterface.addMyGives(token!!,userId!!,addMyGives).enqueue(object : Callback<AddMyGivesResponseData?> {
             override fun onResponse(
                 call: Call<AddMyGivesResponseData?>,
                 response: Response<AddMyGivesResponseData?>
             ) {
                 if(response.isSuccessful){
                     binding.layoutProgressBar.visibility = View.GONE
-
+                    Toast.makeText(this@AddMyGivesActivity, "Give Added Successfully.", Toast.LENGTH_SHORT).show()
+                    finish()
 
                 }
                 else{

@@ -47,7 +47,10 @@ class MyAskFragment : Fragment() {
         _binding = FragmentMyAskBinding.inflate(inflater, container, false)
 
         userId = SaveSharedPreference.getInstance(requireContext()).getUserId()
-        token = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        //userId = "66f28a319ede3bf557e20b02"
+        //token = "bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmYyOGEzMTllZGUzYmY1NTdlMjBiMDIiLCJpYXQiOjE3MjcxNzM1MzMsImV4cCI6MTcyNzYwNTUzM30.Wz8ByOw6qo8oH2-jlAubVIOHYiQGHUSeWdrSm5Kgg74"
+        //Toast.makeText(requireContext(),"Id: $userId \ntoken: $token",Toast.LENGTH_SHORT).show()
 
         binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -55,7 +58,6 @@ class MyAskFragment : Fragment() {
                     startActivity(Intent(requireContext(), AddMyAskActivity::class.java))
                     true
                 }
-
                 else -> false
             }
         }
@@ -63,12 +65,12 @@ class MyAskFragment : Fragment() {
         binding.rvMyAsks.layoutManager = LinearLayoutManager(requireContext())
 
         binding.layoutProgressBar.visibility = View.VISIBLE
-        fetchMyAsk(token!!, userId!!)
+        fetchMyAsk()
 
 
         binding.swipeMyAsks.setOnRefreshListener {
             binding.layoutProgressBar.visibility = View.VISIBLE
-            fetchMyAsk(token!!, userId!!)
+            fetchMyAsk()
             binding.swipeMyAsks.isRefreshing = false
         }
 
@@ -76,10 +78,9 @@ class MyAskFragment : Fragment() {
         return binding.root
     }
 
-    private fun fetchMyAsk(token: String, userId: String) {
+    private fun fetchMyAsk() {
 
-        RetrofitInstance.apiInterface.myAskList(token, userId)
-            .enqueue(object : Callback<MyAskResponseData?> {
+        RetrofitInstance.apiInterface.myAskList(token!!, userId).enqueue(object : Callback<MyAskResponseData?> {
                 override fun onResponse(
                     call: Call<MyAskResponseData?>,
                     response: Response<MyAskResponseData?>
@@ -87,8 +88,9 @@ class MyAskFragment : Fragment() {
                     if (response.isSuccessful) {
                         binding.layoutProgressBar.visibility = View.GONE
                         var myAskResponse = response.body()!!
-                        var myAskList: MutableList<MyAskListData> =
-                            myAskResponse.data as MutableList
+                        var myAskList: MutableList<MyAskListData> = myAskResponse.data as MutableList
+
+                        Log.d("Api Response","MyAskData: $myAskList")
 
                         adapter = MyAskAdapter(requireContext(), myAskList!!)
                         binding.rvMyAsks.adapter = adapter
@@ -105,10 +107,10 @@ class MyAskFragment : Fragment() {
                         binding.layoutProgressBar.visibility = View.GONE
                         Toast.makeText(
                             requireContext(),
-                            "Response Error: ${response.code()}",
+                                "Response Error: ${response.code()}",
                             Toast.LENGTH_SHORT
                         ).show()
-                        Log.d("Api Response", "Error: ${response.code()}")
+                        Log.d("Api Response", "Response Error: ${response.code()}")
                     }
                 }
 
@@ -127,7 +129,7 @@ class MyAskFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.layoutProgressBar.visibility = View.VISIBLE
-        fetchMyAsk(token!!, userId!!)
+        fetchMyAsk()
     }
 
 }

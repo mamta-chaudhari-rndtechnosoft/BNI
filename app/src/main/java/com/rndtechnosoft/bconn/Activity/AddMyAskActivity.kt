@@ -5,13 +5,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
 import com.rndtechnosoft.bconn.Model.AddMyAskBody
 import com.rndtechnosoft.bconn.Model.AddMyAskResponseData
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
-import com.rndtechnosoft.bconn.ViewModel.MyAskViewModel
 import com.rndtechnosoft.bconn.databinding.ActivityAddMyAskBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +18,7 @@ class AddMyAskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddMyAskBinding
     //private lateinit var myAskViewModel: MyAskViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddMyAskBinding.inflate(layoutInflater)
@@ -76,6 +74,7 @@ class AddMyAskActivity : AppCompatActivity() {
 
     private fun addMyAsk() {
         val token: String? = "bearer " + SaveSharedPreference.getInstance(this@AddMyAskActivity).getToken()
+        val userId:String? = SaveSharedPreference.getInstance(this@AddMyAskActivity).getUserId()
         val companyName = binding.etCompany.editText?.text.toString()
         val deptName = binding.etDepartment.editText?.text.toString()
         val companyMessage = binding.etMessage.editText?.text.toString()
@@ -83,14 +82,20 @@ class AddMyAskActivity : AppCompatActivity() {
         val addMyAskBody = AddMyAskBody(companyName, deptName, companyMessage)
 
         //myAskViewModel.addMyAskResult(addMyAskBody, token!!)
-        RetrofitInstance.apiInterface.addMyAsk(token!!,addMyAskBody).enqueue(object : Callback<AddMyAskResponseData?> {
+        RetrofitInstance.apiInterface.addMyAsk(token!!,userId!!,addMyAskBody).enqueue(object : Callback<AddMyAskResponseData?> {
             override fun onResponse(
                 call: Call<AddMyAskResponseData?>,
                 response: Response<AddMyAskResponseData?>
             ) {
                if(response.isSuccessful){
                    binding.layoutProgressBar.visibility = View.GONE
+                   Toast.makeText(
+                       this@AddMyAskActivity,
+                       "Ask Added Successfully.",
+                       Toast.LENGTH_SHORT
+                   ).show()
 
+                   finish()
 
                }
                 else{

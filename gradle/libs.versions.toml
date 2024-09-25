@@ -1,6 +1,6 @@
 [versions]
 agp = "8.3.2"
-kotlin = "1.9.22"
+kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -11,15 +11,17 @@ activity = "1.9.2"
 constraintlayout = "2.1.4"
 lifecycle = "2.8.6"
 retrofit = "2.11.0"
-okhttp = "4.11.0"
+okhttp = "4.12.0"
 glide = "4.16.0"
 picasso = "2.71828"
 swiperefreshlayout = "1.1.0"
 imagepicker = "2.1"
-google-services = "4.4.2"
-#firebase-bom = "33.3.0"
-#firebase-messaging = "24.3.0"
-#firebaseMessagingKtx = "24.0.1"
+firebaseBom = "33.3.0"
+googleServicesGradle = "4.4.2"
+firebaseMessagingKtx = "24.0.1"
+playServicesLocation = "21.3.0"
+
+
 
 
 [libraries]
@@ -49,11 +51,10 @@ picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 imagepicker = { group = "com.github.dhaval2404", name = "imagepicker", version.ref = "imagepicker" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
-#firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-#firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-bom" }
-#firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
-#firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 
 [bundles]
 lifecycle = ["lifecycle-viewmodel", "lifecycle-livedata", "lifecycle-runtime", "lifecycle-common-java8"]
@@ -62,7 +63,8 @@ retrofit = ["retrofit", "retrofit-converter-gson", "okhttp", "okhttp-logging"]
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-#googleServices= { id = "com.google.gms.google-services", version.ref = "google-services" }
+googleServices= { id = "com.google.gms.google-services", version.ref = "googleServicesGradle" }
+
 
 
 

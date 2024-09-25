@@ -12,13 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.rndtechnosoft.bconn.Model.AddMyAskBody
 import com.rndtechnosoft.bconn.R
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
-import com.rndtechnosoft.bconn.ViewModel.MyAskViewModel
 import com.rndtechnosoft.bconn.databinding.FragmentAddMyAskDialogBinding
 
 class AddMyAskDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentAddMyAskDialogBinding
-    private lateinit var myAskViewModel: MyAskViewModel
+    //private lateinit var myAskViewModel: MyAskViewModel
 
     companion object {
 
@@ -38,9 +37,9 @@ class AddMyAskDialogFragment : DialogFragment() {
         binding = FragmentAddMyAskDialogBinding.inflate(inflater, container, false)
         getDialog()?.getWindow()?.setBackgroundDrawableResource(R.drawable.dialog_bg_border)
 
-        myAskViewModel = ViewModelProvider(requireActivity())[MyAskViewModel::class.java]
+        //myAskViewModel = ViewModelProvider(requireActivity())[MyAskViewModel::class.java]
 
-        myAskViewModel.observeAddMyAskResult().observe(requireActivity(), Observer {
+        /*myAskViewModel.observeAddMyAskResult().observe(requireActivity(), Observer {
             when {
                 it.isSuccess -> {
 
@@ -71,7 +70,7 @@ class AddMyAskDialogFragment : DialogFragment() {
                     ).show()
                 }
             }
-        })
+        })*/
 
         binding.btnAddAsk.setOnClickListener {
             addMyAsk()
@@ -90,7 +89,7 @@ class AddMyAskDialogFragment : DialogFragment() {
 
         val addMyAskBody = AddMyAskBody(companyName,deptName,companyMessage)
 
-        myAskViewModel.addMyAskResult(addMyAskBody,token!!)
+        //myAskViewModel.addMyAskResult(addMyAskBody,token!!)
 
     }
 

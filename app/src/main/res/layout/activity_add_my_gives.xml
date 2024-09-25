@@ -19,110 +19,115 @@
         app:titleCentered="true"
         app:titleTextColor="@color/white" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarAddMyGives">
+        android:layout_below="@id/toolbarAddMyGives"
+        android:layout_above="@id/btnAddGives"
+        android:orientation="vertical">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etCompany"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="16dp"
-                android:hint="Company"
-                app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_person"
-                app:startIconTint="@color/black">
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etCompanyEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="16dp"
-                android:hint="Email"
-                app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_email"
-                app:startIconTint="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="Company"
+                    app:boxBackgroundColor="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_person"
+                    app:startIconTint="@color/black">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etCompanyPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="16dp"
-                android:hint="Mobile"
-                app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_phone_android"
-                app:startIconTint="@color/black">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etCompanyEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="Email"
+                    app:boxBackgroundColor="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_email"
+                    app:startIconTint="@color/black">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
 
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etWebUrl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="16dp"
-                android:hint="@string/web_url"
-                app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_phone_android"
-                app:startIconTint="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etCompanyPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="Mobile"
+                    app:boxBackgroundColor="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_phone_android"
+                    app:startIconTint="@color/black">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etDepartment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="12dp"
-                android:hint="@string/dept_name"
-                app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_lock"
-                app:startIconTint="@color/black">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etWebUrl"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/web_url"
+                    app:boxBackgroundColor="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_phone_android"
+                    app:startIconTint="@color/black">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
+                </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/dept_name"
+                    app:boxBackgroundColor="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_lock"
+                    app:startIconTint="@color/black">
 
-        </LinearLayout>
-    </ScrollView>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/layoutProgressBar"
@@ -136,7 +141,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateDrawable="@drawable/progress_indeternimate" />
+            android:indeterminateDrawable="@drawable/progress_indeternimate"
+            />
 
     </FrameLayout>
 
@@ -144,13 +150,12 @@
         android:id="@+id/btnAddGives"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:text="+ Add My Gives"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:cornerRadius="0dp"
-        android:layout_alignParentBottom="true"
-        />
+        app:cornerRadius="0dp" />
 
 </RelativeLayout>

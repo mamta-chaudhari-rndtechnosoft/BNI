@@ -12,14 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.rndtechnosoft.bconn.Model.AddMyGivesBody
 import com.rndtechnosoft.bconn.R
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
-import com.rndtechnosoft.bconn.ViewModel.MyGivesViewModel
 import com.rndtechnosoft.bconn.databinding.FragmentAddMyGivesDialogBinding
 
 
 class AddMyGivesDialogFragment : DialogFragment() {
 
     private lateinit var binding:FragmentAddMyGivesDialogBinding
-    private lateinit var myGivesViewModel: MyGivesViewModel
+    //private lateinit var myGivesViewModel: MyGivesViewModel
 
     companion object {
 
@@ -41,9 +40,9 @@ class AddMyGivesDialogFragment : DialogFragment() {
         getDialog()?.getWindow()?.setBackgroundDrawableResource(R.drawable.dialog_bg_border)
 
 
-        myGivesViewModel = ViewModelProvider(requireActivity())[MyGivesViewModel::class.java]
+        //myGivesViewModel = ViewModelProvider(requireActivity())[MyGivesViewModel::class.java]
 
-        myGivesViewModel.observeAddMyGivesResult().observe(requireActivity(), Observer {
+        /*myGivesViewModel.observeAddMyGivesResult().observe(requireActivity(), Observer {
 
             when {
                 it.isSuccess -> {
@@ -77,7 +76,7 @@ class AddMyGivesDialogFragment : DialogFragment() {
             }
 
 
-        })
+        })*/
 
         binding.btnAddGives.setOnClickListener {
             addMyGives()
@@ -88,7 +87,7 @@ class AddMyGivesDialogFragment : DialogFragment() {
 
     private fun addMyGives(){
 
-        val token:String? = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        /*val token:String? = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
 
         val companyName = binding.etCompany.editText?.text.toString()
         val deptName = binding.etDepartment.editText?.text.toString()
@@ -98,7 +97,7 @@ class AddMyGivesDialogFragment : DialogFragment() {
 
         val addMyGives = AddMyGivesBody(companyName,deptName,companyEmail, companyPhoneNumber,companyUrl)
 
-        myGivesViewModel.addMyGivesResult(addMyGives,token!!)
+        myGivesViewModel.addMyGivesResult(addMyGives,token!!)*/
 
     }
 }

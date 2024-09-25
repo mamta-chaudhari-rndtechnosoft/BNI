@@ -3,17 +3,17 @@
 
     <item
     android:id="@+id/myAsk"
-    android:icon="@drawable/baseline_home_filled_24"
+    android:icon="@drawable/question_mark"
     android:title="My Ask" />
 
     <item
         android:id="@+id/myGive"
-        android:icon="@drawable/baseline_home_filled_24"
+        android:icon="@drawable/hand"
         android:title="My Give" />
 
     <item
         android:id="@+id/myMatch"
-        android:icon="@drawable/baseline_home_filled_24"
+        android:icon="@drawable/match"
         android:title="My Match" />
 
     <item android:id="@+id/profile"

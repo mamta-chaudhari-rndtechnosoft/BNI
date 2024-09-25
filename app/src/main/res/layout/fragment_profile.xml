@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/test_banner" />
+                    android:background="@color/light_blue" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/addImgBanner"

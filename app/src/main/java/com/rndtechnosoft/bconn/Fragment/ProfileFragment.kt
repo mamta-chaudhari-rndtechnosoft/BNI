@@ -280,7 +280,7 @@ class ProfileFragment : Fragment() {
                     response: Response<UpdateProfileBannerImageResponseData?>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(requireContext(), "Success !!", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "Success !!", Toast.LENGTH_SHORT).show()
                         val bannerResponse = response.body()!!
                         val message: String = bannerResponse.message
                         Toast.makeText(requireContext(), "Banner: $message", Toast.LENGTH_SHORT)
@@ -318,12 +318,6 @@ class ProfileFragment : Fragment() {
 
     fun businessList() {
 
-        Toast.makeText(
-            requireContext(),
-            "In the function",
-            Toast.LENGTH_SHORT
-        ).show()
-
         val token: String? = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
 
         RetrofitInstance.apiInterface.businessList(token!!)
@@ -333,11 +327,7 @@ class ProfileFragment : Fragment() {
                     response: Response<List<BusinessListResponseData>?>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Sucess: ${response.code()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
                         val businessResponse = response.body()!!
                         adapter = BusinessListAdapter(requireContext(),businessResponse)
                         binding.rvBusinessList.adapter = adapter

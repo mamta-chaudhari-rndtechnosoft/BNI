@@ -12,6 +12,7 @@ import com.rndtechnosoft.bconn.Model.CountryResponse
 import com.rndtechnosoft.bconn.Model.IndustryResponseData
 import com.rndtechnosoft.bconn.Model.LoginBody
 import com.rndtechnosoft.bconn.Model.LoginResponseData
+import com.rndtechnosoft.bconn.Model.MemberVerifiedResponseData
 import com.rndtechnosoft.bconn.Model.MyAllMatchesResponseData
 import com.rndtechnosoft.bconn.Model.MyAskResponseData
 import com.rndtechnosoft.bconn.Model.MyGivesResponseData
@@ -55,6 +56,7 @@ interface ApiInterface {
     @POST("myAsk/addMyAsk")
     fun addMyAsk(
         @Header("authorization") authorization: String,
+        @Query("user") userId:String,
         @Body addMyAskBody: AddMyAskBody
     ): Call<AddMyAskResponseData>
 
@@ -67,6 +69,7 @@ interface ApiInterface {
     @POST("myGives/addMyGives")
     fun addMyGives(
         @Header("authorization") authorization: String,
+        @Query("user") userId:String,
         @Body addMyGivesBody: AddMyGivesBody
     ): Call<AddMyGivesResponseData>
 
@@ -126,5 +129,11 @@ interface ApiInterface {
 
     @GET("business/businesssList")
     fun businessList(@Header("authorization") authorization: String): Call<List<BusinessListResponseData>>
+
+    //https://bconn.rndtechnosoft.com/api/member/isMemberVerify?id=66f0f6b2da1d20441d068a42
+    @GET("member/isMemberVerify")
+    fun memberVerified(@Query("id") id:String):Call<MemberVerifiedResponseData>
+
+
 
 }

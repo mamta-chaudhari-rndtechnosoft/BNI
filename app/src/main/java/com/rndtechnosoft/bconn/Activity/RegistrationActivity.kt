@@ -135,6 +135,7 @@ class RegistrationActivity : AppCompatActivity() {
                 ).show()
             }*/
             else {
+                binding.layoutProgressBar.visibility = View.VISIBLE
                 userRegister()
             }
         }
@@ -175,16 +176,23 @@ class RegistrationActivity : AppCompatActivity() {
                         val registerResponse: RegisterResponseData = response.body()!!
                         val responseData = registerResponse.newMember
                         val userId = responseData._id
+                        val approveAdmin = responseData.approvedByadmin
+                        val approveMember = responseData.approvedBymember
 
-                        SaveSharedPreference.getInstance(this@RegistrationActivity).saveRegisterUserId(userId)
-                        Toast.makeText(this@RegistrationActivity, "Success", Toast.LENGTH_SHORT).show()
+                        SaveSharedPreference.getInstance(this@RegistrationActivity).saveAdminApproveStatus(approveAdmin)
+                        SaveSharedPreference.getInstance(this@RegistrationActivity).saveMemberApproveStatus(approveMember)
+                        SaveSharedPreference.getInstance(this@RegistrationActivity).saveUserId(userId)
 
-                        var intent:Intent = Intent(this@RegistrationActivity,ThankYouActivity::class.java)
+                        Toast.makeText(this@RegistrationActivity, "Success", Toast.LENGTH_SHORT)
+                            .show()
+
+                        var intent: Intent = Intent(this@RegistrationActivity, ThankYouActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         finish()
 
                     } else {
+                        binding.layoutProgressBar.visibility = View.GONE
                         Toast.makeText(
                             this@RegistrationActivity,
                             "Response Error: ${response.code()}",
@@ -195,6 +203,7 @@ class RegistrationActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<RegisterResponseData?>, t: Throwable) {
+                    binding.layoutProgressBar.visibility = View.GONE
                     Toast.makeText(
                         this@RegistrationActivity,
                         "Error: ${t.localizedMessage}",

@@ -9,13 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rndtechnosoft.bconn.Adapter.MyMatchByCompanyAdapter
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
-import com.rndtechnosoft.bconn.ViewModel.MyMatchViewModel
 import com.rndtechnosoft.bconn.databinding.ActivityMyMatchByDepartmentAndCompanyBinding
 
 class MyMatchByDepartmentAndCompany : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyMatchByDepartmentAndCompanyBinding
-    private lateinit var viewModel: MyMatchViewModel
+    //private lateinit var viewModel: MyMatchViewModel
     private lateinit var adapter: MyMatchByCompanyAdapter
     private var companyName: String? = null
     private var deptName: String? = null
@@ -26,8 +25,8 @@ class MyMatchByDepartmentAndCompany : AppCompatActivity() {
         binding = ActivityMyMatchByDepartmentAndCompanyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel =
-            ViewModelProvider(this@MyMatchByDepartmentAndCompany)[MyMatchViewModel::class.java]
+        /*viewModel =
+            ViewModelProvider(this@MyMatchByDepartmentAndCompany)[MyMatchViewModel::class.java]*/
 
         binding.rvMyMatchByCompany.layoutManager =
             LinearLayoutManager(this@MyMatchByDepartmentAndCompany)
@@ -44,7 +43,7 @@ class MyMatchByDepartmentAndCompany : AppCompatActivity() {
 
     private fun myMatchByDepartment() {
 
-        viewModel.setMyAllMatchByCompany(token!!, userId!!, companyName!!, deptName!!)
+        /*viewModel.setMyAllMatchByCompany(token!!, userId!!, companyName!!, deptName!!)
 
         viewModel.getMyAllMatchByCompany().observe(this@MyMatchByDepartmentAndCompany, Observer {
             adapter = MyMatchByCompanyAdapter(this@MyMatchByDepartmentAndCompany, it)
@@ -55,6 +54,9 @@ class MyMatchByDepartmentAndCompany : AppCompatActivity() {
             Toast.makeText(this@MyMatchByDepartmentAndCompany, "Error: $it", Toast.LENGTH_SHORT)
                 .show()
             Log.d("Api Response", "Error: $it")
-        })
+        })*/
+
+
+
     }
 }

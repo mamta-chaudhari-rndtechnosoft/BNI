@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    //alias(libs.plugins.googleServices)
+    alias(libs.plugins.googleServices)
+
 }
 
 android {
@@ -14,7 +15,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -58,10 +58,12 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.imagepicker)
 
-    /*implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.messaging)
-    implementation(libs.firebase.messaging.ktx)*/
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.play.services.location)
+    //implementation(libs.firebase.messaging)
+    //implementation(libs.firebase.messaging.ktx)
+
 
     //implementation(libs.firebase.bom)
     //implementation("com.google.firebase:firebase-analytics")
