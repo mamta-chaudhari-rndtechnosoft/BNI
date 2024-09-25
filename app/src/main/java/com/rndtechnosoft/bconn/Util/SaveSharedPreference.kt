@@ -13,6 +13,7 @@ class SaveSharedPreference private constructor(context: Context) {
         private const val USER_ID_REGISTER = "registerUserId"
         private const val MEMBER_APPROVE = "approveByMember"
         private const val ADMIN_APPROVE = "approveByAdmin"
+        private const val REFERRAL_NUMBER = "referralNumber"
 
         @Volatile
         private var INSTANCE: SaveSharedPreference? = null
@@ -76,6 +77,8 @@ class SaveSharedPreference private constructor(context: Context) {
         sharedPreference.edit().remove(STATUS).apply()
     }
 
+
+
     fun saveMemberApproveStatus(memberApprove: String) {
         sharedPreference.edit().putString(MEMBER_APPROVE, memberApprove).apply()
     }
@@ -98,6 +101,18 @@ class SaveSharedPreference private constructor(context: Context) {
 
     fun clearAdminApproveStatus() {
         sharedPreference.edit().remove(ADMIN_APPROVE).apply()
+    }
+
+    fun saveReferralNumber(referralNumber: String) {
+        sharedPreference.edit().putString(REFERRAL_NUMBER, referralNumber).apply()
+    }
+
+    fun getReferralNumber(): String? {
+        return sharedPreference.getString(REFERRAL_NUMBER, "")
+    }
+
+    fun clearReferralNumber() {
+        sharedPreference.edit().remove(REFERRAL_NUMBER).apply()
     }
 
 }

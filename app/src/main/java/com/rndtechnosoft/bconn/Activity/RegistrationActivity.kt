@@ -179,12 +179,13 @@ class RegistrationActivity : AppCompatActivity() {
                         val approveAdmin = responseData.approvedByadmin
                         val approveMember = responseData.approvedBymember
 
+
                         SaveSharedPreference.getInstance(this@RegistrationActivity).saveAdminApproveStatus(approveAdmin)
                         SaveSharedPreference.getInstance(this@RegistrationActivity).saveMemberApproveStatus(approveMember)
                         SaveSharedPreference.getInstance(this@RegistrationActivity).saveUserId(userId)
 
-                        Toast.makeText(this@RegistrationActivity, "Success", Toast.LENGTH_SHORT)
-                            .show()
+
+                        Toast.makeText(this@RegistrationActivity, "Register Successfully.", Toast.LENGTH_SHORT).show()
 
                         var intent: Intent = Intent(this@RegistrationActivity, ThankYouActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

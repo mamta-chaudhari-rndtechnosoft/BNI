@@ -70,12 +70,18 @@ class LoginActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         binding.layoutProgressBar.visibility = View.GONE
                         val loginResponse: LoginResponseData = response.body()!!
+                        val loginMemberResponse = loginResponse.member
                         val token = loginResponse.token
-                        val userId = loginResponse.userId
+                        val userId = loginMemberResponse._id
+                        val referralNumber = loginMemberResponse.refral_code
+
 
                         //Toast.makeText(this@LoginActivity, "Success", Toast.LENGTH_SHORT).show()
                         SaveSharedPreference.getInstance(this@LoginActivity).saveUserId(userId)
                         SaveSharedPreference.getInstance(this@LoginActivity).saveToken(token)
+                        SaveSharedPreference.getInstance(this@LoginActivity).saveReferralNumber(referralNumber)
+
+                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
 
                         val intent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -2,57 +2,64 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_red"
-    android:orientation="vertical"
-    tools:context=".Activity.MyMatchByDepartmentAndCompany">
+    android:background="@color/white"
+    tools:context=".Activity.EditAboutMeActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbarMyMatchByCompany"
+        android:id="@+id/toolbarEditAboutMe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondary_color"
+        android:background="@color/primary_color"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
         app:navigationIconTint="@color/white"
-        app:title="My Matches"
+        app:title="Edit About Me"
         app:titleCentered="true"
         app:titleTextColor="@color/white" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbarMyMatchByCompany">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarEditAboutMe">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMyMatchByCompany"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_my_all_match" />
+                android:layout_height="wrap_content"
+                android:text="About Me"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                />
+
+            <EditText
+                android:id="@+id/etAboutMe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_border"
+                android:padding="15dp"
+                android:layout_marginHorizontal="20dp"
+                android:inputType="textMultiLine"
+                />
 
         </LinearLayout>
+    </ScrollView>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <TextView
-        android:id="@+id/tvNoData"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEditAboutMe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="No Match Available"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginTop="0dp"
+        android:text="Edit About Me"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        app:cornerRadius="0dp" />
 
     <FrameLayout
         android:id="@+id/layoutProgressBar"
@@ -69,6 +76,5 @@
             android:indeterminateDrawable="@drawable/progress_indeternimate" />
 
     </FrameLayout>
-
 
 </RelativeLayout>

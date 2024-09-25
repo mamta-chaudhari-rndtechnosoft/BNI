@@ -27,8 +27,8 @@
                     android:id="@+id/imgBanner"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    android:background="@color/light_blue" />
+                    android:background="@color/light_blue"
+                    android:scaleType="centerCrop" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/addImgBanner"
@@ -84,6 +84,7 @@
             </FrameLayout>
 
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -100,6 +101,7 @@
                 android:text="Ask Added"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:backgroundTint="@color/white"
                 app:strokeColor="@color/secondary_color"
                 app:strokeWidth="1dp" />
@@ -255,12 +257,6 @@
                 android:text="@string/dummy_text"
                 android:textColor="@color/black" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/dummy_text"
-                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"

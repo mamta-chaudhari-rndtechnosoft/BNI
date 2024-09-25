@@ -15,7 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.rndtechnosoft.bconn.Activity.AddWorkActivity
+import com.rndtechnosoft.bconn.Activity.EditAboutMeActivity
 import com.rndtechnosoft.bconn.Activity.EditProfileContactDetailActivity
+import com.rndtechnosoft.bconn.Activity.ManageMembersActivity
 import com.rndtechnosoft.bconn.Adapter.BusinessListAdapter
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
 import com.rndtechnosoft.bconn.Model.BusinessListResponseData
@@ -54,7 +56,13 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[ManageProfileViewModel::class.java]
 
         binding.imgEditContactDetails.setOnClickListener {
-            startActivity(Intent(requireContext(), EditProfileContactDetailActivity::class.java))
+
+            //startActivity(Intent(requireContext(), EditProfileContactDetailActivity::class.java))
+            startActivity(Intent(requireContext(), ManageMembersActivity::class.java))
+        }
+
+        binding.imgEditAboutMe.setOnClickListener {
+            startActivity(Intent(requireContext(),EditAboutMeActivity::class.java))
         }
 
         binding.addImgBanner.setOnClickListener {
@@ -247,7 +255,7 @@ class ProfileFragment : Fragment() {
         val token: String? =
             "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         //val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
-        val userId:String? = "668e5525302bc003f5cc8c8d"
+        val userId:String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
         /*var prefixedImageBase64:String? = null
 
         val imageBannerRequestBody: RequestBody? = uriBanner?.let { uri ->
