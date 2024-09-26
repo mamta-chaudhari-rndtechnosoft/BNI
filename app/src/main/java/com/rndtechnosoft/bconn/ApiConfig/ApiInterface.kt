@@ -17,8 +17,11 @@ import com.rndtechnosoft.bconn.Model.MyAllMatchesResponseData
 import com.rndtechnosoft.bconn.Model.MyAskResponseData
 import com.rndtechnosoft.bconn.Model.MyGivesResponseData
 import com.rndtechnosoft.bconn.Model.MyMatchByCompaniesResponseData
+import com.rndtechnosoft.bconn.Model.ReferralMembersResponseData
 import com.rndtechnosoft.bconn.Model.RegisterResponseData
 import com.rndtechnosoft.bconn.Model.RegisterUserBody
+import com.rndtechnosoft.bconn.Model.UpdateMemberStatusBody
+import com.rndtechnosoft.bconn.Model.UpdateMemberStatusResponseData
 import com.rndtechnosoft.bconn.Model.UpdateProfileBannerImageResponseData
 import com.rndtechnosoft.bconn.Model.UpdateProfileImageResponseData
 import okhttp3.MultipartBody
@@ -56,7 +59,7 @@ interface ApiInterface {
     @POST("myAsk/addMyAsk")
     fun addMyAsk(
         @Header("authorization") authorization: String,
-        @Query("user") userId:String,
+        @Query("user") userId: String,
         @Body addMyAskBody: AddMyAskBody
     ): Call<AddMyAskResponseData>
 
@@ -69,7 +72,7 @@ interface ApiInterface {
     @POST("myGives/addMyGives")
     fun addMyGives(
         @Header("authorization") authorization: String,
-        @Query("user") userId:String,
+        @Query("user") userId: String,
         @Body addMyGivesBody: AddMyGivesBody
     ): Call<AddMyGivesResponseData>
 
@@ -132,8 +135,21 @@ interface ApiInterface {
 
     //https://bconn.rndtechnosoft.com/api/member/isMemberVerify?id=66f0f6b2da1d20441d068a42
     @GET("member/isMemberVerify")
-    fun memberVerified(@Query("id") id:String):Call<MemberVerifiedResponseData>
+    fun memberVerified(@Query("id") id: String): Call<MemberVerifiedResponseData>
+
+    //status are: pending,cancel, approved
+    @GET("member/getPendingMember")
+    fun getReferralMembers(
+        @Header("authorization") authorization: String,
+        @Query("refMember") refMember: String,
+        @Query("status") status: String
+    ): Call<ReferralMembersResponseData>
 
 
+    @PUT("member/updatememberById")
+    fun updateMemberStatus(
+        @Query("id") id:String,
+        @Body updateMemberStatusBody: UpdateMemberStatusBody
+    ):Call<UpdateMemberStatusResponseData>
 
 }

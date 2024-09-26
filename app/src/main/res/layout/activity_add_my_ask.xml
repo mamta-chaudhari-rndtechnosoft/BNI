@@ -13,7 +13,7 @@
         android:id="@+id/toolbarAddMyAsk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondary_color"
+        android:background="@color/primary_color"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
         app:navigationIconTint="@color/white"
         app:title="Add My Ask"
@@ -33,7 +33,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout

@@ -21,6 +21,7 @@ class MyMatchByCompanyAdapter(private val context:Context, private val matchList
             binding.tvEmail.text = myMatchData.myGives.email
             binding.tvPhone.text = myMatchData.myGives.phoneNumber
             binding.tvUrl.text = myMatchData.myGives.webURL
+
         }
     }
 
