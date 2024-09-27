@@ -10,7 +10,8 @@
         android:id="@+id/toolbarMyMatch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondary_color"
+        android:background="@color/primary_color"
+        app:titleTextAppearance="@style/toolbar_text"
         app:title="My Matches"
         app:titleCentered="true"
         app:titleTextColor="@color/white" />

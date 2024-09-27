@@ -9,7 +9,7 @@ import com.rndtechnosoft.bconn.databinding.ItemMyAllMatchBinding
 
 class MyMatchAdapter(
     private val context: Context,
-    private val myMatchList: MutableList<MatchedCompany>
+    private val myMatchList: List<MatchedCompany>
 ) : RecyclerView.Adapter<MyMatchAdapter.ViewHolder>() {
 
 

@@ -31,7 +31,7 @@ class PendingMemberFragment : Fragment(), PendingMemberAdapter.itemButtonClickLi
 
     private lateinit var adapter: PendingMemberAdapter
 
-    val refMemberDataList: MutableList<ReferralMemberData> = mutableListOf()
+    var refMemberDataList: MutableList<ReferralMemberData> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +65,10 @@ class PendingMemberFragment : Fragment(), PendingMemberAdapter.itemButtonClickLi
 
     private fun getPendingMember() {
 
-        val token = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        val token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         val refCode = SaveSharedPreference.getInstance(requireContext()).getReferralNumber()
+
+        //Toast.makeText(requireContext(),"Code: " + refCode, Toast.LENGTH_SHORT).show()
 
         RetrofitInstance.apiInterface.getReferralMembers(token, refCode!!, "pending")
             .enqueue(object : Callback<ReferralMembersResponseData?> {
@@ -80,8 +82,9 @@ class PendingMemberFragment : Fragment(), PendingMemberAdapter.itemButtonClickLi
                         val referralMemberResponse = response.body()!!
                         //val refMemberDataList = referralMemberResponse.data as MutableList
 
-                        refMemberDataList.clear()
-                        refMemberDataList.addAll(referralMemberResponse.data)
+                        //refMemberDataList.clear()
+                        //refMemberDataList.addAll(referralMemberResponse.data)
+                        refMemberDataList = referralMemberResponse.data as MutableList
 
                         adapter = PendingMemberAdapter(
                             requireContext(),
@@ -125,7 +128,9 @@ class PendingMemberFragment : Fragment(), PendingMemberAdapter.itemButtonClickLi
 
         val updateMemberStatusBody = UpdateMemberStatusBody("approved")
 
-        RetrofitInstance.apiInterface.updateMemberStatus(id, updateMemberStatusBody)
+        val token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()!!
+
+        RetrofitInstance.apiInterface.updateMemberStatus(token, id, updateMemberStatusBody)
             .enqueue(object : Callback<UpdateMemberStatusResponseData?> {
                 override fun onResponse(
                     call: Call<UpdateMemberStatusResponseData?>,
@@ -168,12 +173,13 @@ class PendingMemberFragment : Fragment(), PendingMemberAdapter.itemButtonClickLi
     private fun rejectMember(position: Int, id: String) {
         val updateMemberStatusBody = UpdateMemberStatusBody("cancel")
 
-        RetrofitInstance.apiInterface.updateMemberStatus(id, updateMemberStatusBody)
+        val token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()!!
+
+        RetrofitInstance.apiInterface.updateMemberStatus(token, id, updateMemberStatusBody)
             .enqueue(object : Callback<UpdateMemberStatusResponseData?> {
                 override fun onResponse(
                     call: Call<UpdateMemberStatusResponseData?>,
-                    response: Response<UpdateMemberStatusResponseData?>
-                ) {
+                    response: Response<UpdateMemberStatusResponseData?>) {
                     if (response.isSuccessful) {
                         binding.layoutProgressBar.visibility = View.GONE
                         val updateResponseData = response.body()!!
@@ -218,5 +224,15 @@ class PendingMemberFragment : Fragment(), PendingMemberAdapter.itemButtonClickLi
         rejectMember(position, id)
     }
 
+   /* override fun onPause() {
+        super.onPause()
+        binding.layoutProgressBar.visibility = View.VISIBLE
+        getPendingMember()
+    }*/
 
+    override fun onResume() {
+        super.onResume()
+        binding.layoutProgressBar.visibility = View.VISIBLE
+        getPendingMember()
+    }
 }

@@ -12,9 +12,10 @@
         android:id="@+id/toolbarAddMyGives"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondary_color"
+        android:background="@color/primary_color"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
         app:navigationIconTint="@color/white"
+        app:titleTextAppearance="@style/toolbar_text"
         app:title="Add My Gives"
         app:titleCentered="true"
         app:titleTextColor="@color/white" />
@@ -45,7 +46,7 @@
                     android:layout_marginTop="16dp"
                     android:hint="Company"
                     app:boxBackgroundColor="@color/light_red"
-                    app:startIconDrawable="@drawable/baseline_person"
+                    app:startIconDrawable="@drawable/baseline_business_24"
                     app:startIconTint="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -53,6 +54,34 @@
                         android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!--<com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/dept_name"
+                    app:boxBackgroundColor="@color/light_red"
+                    app:startIconDrawable="@drawable/baseline_department_24"
+                    app:startIconTint="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>-->
+
+                <Spinner
+                    android:id="@+id/spinnerDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:popupBackground="@color/white"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/spinner_border_material"
+                    android:padding="15dp"
+                    />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etCompanyEmail"
@@ -80,7 +109,7 @@
                     android:layout_marginTop="16dp"
                     android:hint="Mobile"
                     app:boxBackgroundColor="@color/light_red"
-                    app:startIconDrawable="@drawable/baseline_phone_android"
+                    app:startIconDrawable="@drawable/outline_phone_24"
                     app:startIconTint="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -99,7 +128,7 @@
                     android:layout_marginTop="16dp"
                     android:hint="@string/web_url"
                     app:boxBackgroundColor="@color/light_red"
-                    app:startIconDrawable="@drawable/baseline_phone_android"
+                    app:startIconDrawable="@drawable/baseline_insert_link_24"
                     app:startIconTint="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -108,22 +137,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etDepartment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="12dp"
-                    android:hint="@string/dept_name"
-                    app:boxBackgroundColor="@color/light_red"
-                    app:startIconDrawable="@drawable/baseline_lock"
-                    app:startIconTint="@color/black">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </ScrollView>

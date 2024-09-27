@@ -16,11 +16,11 @@ class MyMatchByCompanyAdapter(private val context:Context, private val matchList
 
         fun bind(myMatchData: Data) {
 
-            binding.tvCompanyName.text = myMatchData.myGives.companyName
-            binding.tvDeptName.text = myMatchData.myGives.dept
-            binding.tvEmail.text = myMatchData.myGives.email
-            binding.tvPhone.text = myMatchData.myGives.phoneNumber
-            binding.tvUrl.text = myMatchData.myGives.webURL
+            binding.tvCompanyName.text = myMatchData.companyName
+            binding.tvDeptName.text = myMatchData.dept
+            binding.tvEmail.text = myMatchData.email
+            binding.tvPhone.text = myMatchData.phoneNumber
+            binding.tvUrl.text = myMatchData.webURL
 
         }
     }

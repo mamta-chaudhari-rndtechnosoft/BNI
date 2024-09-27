@@ -37,7 +37,13 @@ class PendingMemberAdapter(
         holder.binding.tvName.text = memberData.name
         holder.binding.tvEmail.text = memberData.email
         holder.binding.tvMobile.text = memberData.mobile
-        holder.binding.tvStatus.text = memberData.approvedBymember
+
+        var status = memberData.approvedBymember
+        if (status == "pending") {
+            status = "Pending"
+        }
+        holder.binding.tvStatus.text = status
+
 
         holder.binding.btnAccept.setOnClickListener {
 

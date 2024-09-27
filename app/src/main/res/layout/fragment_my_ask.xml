@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:buttonGravity="center_vertical"
+            app:titleTextAppearance="@style/toolbar_text"
             app:menu="@menu/top_app_bar"
             app:title="@string/my_asks"
             app:titleCentered="true" />

@@ -1,13 +1,19 @@
 package com.rndtechnosoft.bconn.Activity
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
 import com.rndtechnosoft.bconn.Model.AddMyGivesBody
 import com.rndtechnosoft.bconn.Model.AddMyGivesResponseData
+import com.rndtechnosoft.bconn.Model.DepartmentData
+import com.rndtechnosoft.bconn.Model.DepartmentListResponseData
+import com.rndtechnosoft.bconn.Model.IndustryData
+import com.rndtechnosoft.bconn.Model.IndustryResponseData
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
 import com.rndtechnosoft.bconn.databinding.ActivityAddMyGivesBinding
 import retrofit2.Call
@@ -28,62 +34,27 @@ class AddMyGivesActivity : AppCompatActivity() {
             finish()
         }
 
-        //myGivesViewModel = ViewModelProvider(this@AddMyGivesActivity)[MyGivesViewModel::class.java]
-
-       /* myGivesViewModel.observeAddMyGivesResult().observe(this@AddMyGivesActivity, Observer {
-
-            when {
-                it.isSuccess -> {
-
-                    val addMyGivesResponseBody = it.getOrNull()!!
-                    val status: String = addMyGivesResponseBody.status
-                    val message: String = addMyGivesResponseBody.message
-
-                    when (status) {
-                        "success" -> {
-                            Toast.makeText(this@AddMyGivesActivity, message, Toast.LENGTH_SHORT)
-                                .show()
-                            finish()
-                            //dismiss()
-                        }
-
-                        "failed" -> {
-                            Toast.makeText(this@AddMyGivesActivity, message, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                }
-
-                it.isFailure -> {
-                    val error = it.exceptionOrNull()
-                    Log.d("Api Response", "Failed: ${error?.message.toString()}")
-                    Toast.makeText(
-                        this@AddMyGivesActivity,
-                        "Failed: ${error?.message.toString()}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
-        })*/
 
         binding.btnAddGives.setOnClickListener {
             binding.layoutProgressBar.visibility = View.VISIBLE
             addMyGives()
         }
 
+        fetchDepartment()
 
     }
 
     private fun addMyGives() {
 
-        val token: String? =
-            "bearer " + SaveSharedPreference.getInstance(this@AddMyGivesActivity).getToken()
+        val token: String? = "Bearer " + SaveSharedPreference.getInstance(this@AddMyGivesActivity).getToken()
 
         val userId:String? = SaveSharedPreference.getInstance(this@AddMyGivesActivity).getUserId()
 
         val companyName = binding.etCompany.editText?.text.toString()
-        val deptName = binding.etDepartment.editText?.text.toString()
+
+        //val deptName = binding.etDepartment.editText?.text.toString()
+        val deptName =binding.spinnerDepartment.selectedItem.toString()
+
         val companyEmail = binding.etCompanyEmail.editText?.text.toString()
         val companyPhoneNumber = binding.etCompanyPhone.editText?.text.toString()
         val companyUrl = binding.etWebUrl.editText?.text.toString()
@@ -123,7 +94,54 @@ class AddMyGivesActivity : AppCompatActivity() {
                 Log.d("Api Response", "Error: ${t.localizedMessage}")
             }
         })
-
     }
+
+    private fun fetchDepartment(){
+        val token: String? = "Bearer " + SaveSharedPreference.getInstance(this@AddMyGivesActivity).getToken()
+
+        RetrofitInstance.apiInterface.getAllDepartment(token!!).enqueue(object : Callback<DepartmentListResponseData?> {
+            override fun onResponse(
+                call: Call<DepartmentListResponseData?>,
+                response: Response<DepartmentListResponseData?>
+            ) {
+                if(response.isSuccessful){
+                    val departmentResponse: DepartmentListResponseData = response.body()!!
+                    val departmentList: List<DepartmentData> = departmentResponse.data
+
+                    val departmentTitleList = mutableListOf<String>()
+
+                    departmentTitleList.add("Select Department")
+
+                    departmentTitleList.addAll(departmentList.map {
+                        it.name
+                    })
+
+                    val adapter = ArrayAdapter(
+                        this@AddMyGivesActivity,
+                        R.layout.simple_spinner_dropdown_item,
+                        departmentTitleList
+                    )
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.spinnerDepartment.adapter = adapter
+                }
+                else{
+                    Toast.makeText(
+                        this@AddMyGivesActivity,
+                        "Response Error: ${response.code()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<DepartmentListResponseData?>, t: Throwable) {
+                Toast.makeText(
+                    this@AddMyGivesActivity,
+                    "Error: ${t.localizedMessage}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+    }
+
 
 }

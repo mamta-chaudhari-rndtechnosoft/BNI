@@ -60,7 +60,7 @@ class MyMatchFragment : Fragment() {
 
     private fun myAllMatchList() {
 
-        val token: String? = SaveSharedPreference.getInstance(requireContext()).getToken()
+        val token: String? =  "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
 
         RetrofitInstance.apiInterface.myAllMatches(token!!, userId!!)
@@ -71,9 +71,8 @@ class MyMatchFragment : Fragment() {
                 ) {
                     if (response.isSuccessful) {
                         binding.layoutProgressBar.visibility = View.GONE
-                        var myAllMatchResponse = response.body()
-                        var myAllMatchList: MutableList<MatchedCompany> =
-                            myAllMatchResponse!!.matchedCompanies as MutableList
+                        val myAllMatchResponse = response.body()!!
+                        val myAllMatchList: List<MatchedCompany> = myAllMatchResponse.data
 
                         adapter = MyMatchAdapter(requireContext(),myAllMatchList)
                         binding.rvMyMatch.adapter = adapter

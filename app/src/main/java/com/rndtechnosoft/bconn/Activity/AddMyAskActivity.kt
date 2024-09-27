@@ -73,7 +73,7 @@ class AddMyAskActivity : AppCompatActivity() {
     }
 
     private fun addMyAsk() {
-        val token: String? = "bearer " + SaveSharedPreference.getInstance(this@AddMyAskActivity).getToken()
+        val token: String? = "Bearer " + SaveSharedPreference.getInstance(this@AddMyAskActivity).getToken()
         val userId:String? = SaveSharedPreference.getInstance(this@AddMyAskActivity).getUserId()
         val companyName = binding.etCompany.editText?.text.toString()
         val deptName = binding.etDepartment.editText?.text.toString()

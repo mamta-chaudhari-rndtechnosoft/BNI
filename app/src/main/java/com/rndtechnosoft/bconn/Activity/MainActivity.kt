@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOCATION_PERMISSION_REQUEST_CODE = 1000
+    private val NOTIFICATION_PERMISSION_REQUEST_CODE = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +72,8 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation()
+
+        checkNotificationPermission()
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -127,6 +130,24 @@ class MainActivity : AppCompatActivity() {
                 // Permission denied, handle it
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+    private fun checkNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted, request the permission
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    NOTIFICATION_PERMISSION_REQUEST_CODE
+                )
+            } else {
+                // Permission is already granted
+                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            // For Android versions below 13, no need to check or request
+            Toast.makeText(this, "Notification permission not required below Android 13", Toast.LENGTH_SHORT).show()
         }
     }
 

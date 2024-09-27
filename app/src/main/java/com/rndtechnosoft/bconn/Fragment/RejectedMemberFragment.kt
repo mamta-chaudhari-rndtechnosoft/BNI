@@ -58,10 +58,11 @@ class RejectedMemberFragment : Fragment() {
 
     private fun getRejectedMember(){
 
-        val token = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        val token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         val refCode = SaveSharedPreference.getInstance(requireContext()).getReferralNumber()
 
-        RetrofitInstance.apiInterface.getReferralMembers(token,refCode!!,"cancel").enqueue(object :
+        RetrofitInstance.apiInterface.getReferralMembers(token,refCode!!,"cancel")
+            .enqueue(object :
             Callback<ReferralMembersResponseData?> {
             override fun onResponse(
                 call: Call<ReferralMembersResponseData?>,
@@ -98,6 +99,18 @@ class RejectedMemberFragment : Fragment() {
                 Toast.makeText(requireContext(),"Error: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+   /* override fun onPause() {
+        super.onPause()
+        binding.layoutProgressBar.visibility = View.VISIBLE
+        getRejectedMember()
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+        binding.layoutProgressBar.visibility = View.VISIBLE
+        getRejectedMember()
     }
 
 }

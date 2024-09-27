@@ -18,6 +18,7 @@
         app:navigationIconTint="@color/white"
         app:title="Add My Ask"
         app:titleCentered="true"
+        app:titleTextAppearance="@style/toolbar_text"
         app:titleTextColor="@color/white" />
 
     <LinearLayout
@@ -44,7 +45,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="Company"
                 app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_person"
+                app:startIconDrawable="@drawable/baseline_business_24"
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -61,7 +62,7 @@
                 android:layout_marginTop="12dp"
                 android:hint="Department"
                 app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_lock"
+                app:startIconDrawable="@drawable/baseline_department_24"
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -78,7 +79,7 @@
                 android:layout_marginTop="12dp"
                 android:hint="Message"
                 app:boxBackgroundColor="@color/light_red"
-                app:startIconDrawable="@drawable/baseline_lock"
+                app:startIconDrawable="@drawable/baseline_message_24"
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText

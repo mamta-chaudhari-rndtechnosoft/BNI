@@ -54,9 +54,10 @@ class ApproveMemberFragment : Fragment() {
         return binding.root
     }
 
+
     private fun getApprovedMember() {
 
-        val token = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        val token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         val refCode = SaveSharedPreference.getInstance(requireContext()).getReferralNumber()
 
         RetrofitInstance.apiInterface.getReferralMembers(token, refCode!!, "approved")
@@ -105,4 +106,15 @@ class ApproveMemberFragment : Fragment() {
             })
     }
 
+  /*  override fun onPause() {
+        super.onPause()
+        binding.layoutProgressBar.visibility = View.VISIBLE
+        getApprovedMember()
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+        binding.layoutProgressBar.visibility = View.VISIBLE
+        getApprovedMember()
+    }
 }

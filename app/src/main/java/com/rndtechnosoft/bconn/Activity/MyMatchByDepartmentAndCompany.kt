@@ -41,7 +41,7 @@ class MyMatchByDepartmentAndCompany : AppCompatActivity() {
         companyName = intent.getStringExtra("companyName")
         deptName = intent.getStringExtra("dept")
         userId = SaveSharedPreference.getInstance(this@MyMatchByDepartmentAndCompany).getUserId()
-        token = "bearer " + SaveSharedPreference.getInstance(this@MyMatchByDepartmentAndCompany).getToken()
+        token = "Bearer " + SaveSharedPreference.getInstance(this@MyMatchByDepartmentAndCompany).getToken()
 
 
 
@@ -58,7 +58,7 @@ class MyMatchByDepartmentAndCompany : AppCompatActivity() {
 
     private fun myMatchByDepartment() {
 
-        RetrofitInstance.apiInterface.myMatchByCompany(token!!, userId!!, companyName!!, deptName!!).enqueue(object : Callback<MyMatchByCompaniesResponseData?> {
+        RetrofitInstance.apiInterface.myMatchByCompany(token!!, companyName!!, deptName!!).enqueue(object : Callback<MyMatchByCompaniesResponseData?> {
             override fun onResponse(
                 call: Call<MyMatchByCompaniesResponseData?>,
                 response: Response<MyMatchByCompaniesResponseData?>

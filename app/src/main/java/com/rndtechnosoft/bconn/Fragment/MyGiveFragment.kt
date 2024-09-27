@@ -45,7 +45,7 @@ class MyGiveFragment : Fragment() {
     ): View? {
         _binding = FragmentMyGiveBinding.inflate(inflater,container,false)
 
-        token = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        token = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         userId = SaveSharedPreference.getInstance(requireContext()).getUserId()
 
         binding.topAppBar.setOnMenuItemClickListener {
@@ -82,7 +82,7 @@ class MyGiveFragment : Fragment() {
                  if(response.isSuccessful){
                      binding.layoutProgressBar.visibility = View.GONE
                      val myGivesResponse = response.body()
-                     var myGivesList:MutableList<MyGivesData> = myGivesResponse!!.data as MutableList
+                     val myGivesList:MutableList<MyGivesData> = myGivesResponse!!.data as MutableList
 
                      adapter = MyGivesAdapter(myGivesList,requireContext())
                      binding.rvMyGives.adapter = adapter

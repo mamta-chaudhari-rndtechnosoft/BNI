@@ -3,14 +3,10 @@ package com.rndtechnosoft.bconn.Model
 data class MyMatchByCompaniesResponseData(
 
     val `data`: List<Data>,
-    val status: String
+    //val status: String
 )
 
 data class Data(
-    val myGives: MyGives
-)
-
-data class MyGives(
     val _id: String,
     val companyName: String,
     val createdAt: String,
@@ -18,6 +14,15 @@ data class MyGives(
     val email: String,
     val phoneNumber: String,
     val updatedAt: String,
-    val user: String,
+    val user: UserMyMatch,
     val webURL: String
+)
+
+data class UserMyMatch(
+    val _id: String,
+    val name: String,
+    val email: String,
+    val mobile: String,
+    val country: String,
+    val city: String
 )

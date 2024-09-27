@@ -29,7 +29,13 @@ class ApproveMemberAdapter(var context: Context, var approveMemberList: List<Ref
         holder.binding.tvName.text = memberData.name
         holder.binding.tvEmail.text = memberData.email
         holder.binding.tvMobile.text = memberData.mobile
-        holder.binding.tvStatus.text = memberData.approvedBymember
+
+        //holder.binding.tvStatus.text = memberData.approvedBymember
+        var status = memberData.approvedBymember
+        if (status == "approved") {
+            status = "Approved"
+        }
+        holder.binding.tvStatus.text = status
 
     }
 

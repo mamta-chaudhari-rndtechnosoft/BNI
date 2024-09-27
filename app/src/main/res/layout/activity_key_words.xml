@@ -15,6 +15,7 @@
         android:background="@color/primary_color"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
         app:navigationIconTint="@color/white"
+        app:titleTextAppearance="@style/toolbar_text"
         app:title="Add Keywords"
         app:titleCentered="true"
         app:titleTextColor="@color/white" />

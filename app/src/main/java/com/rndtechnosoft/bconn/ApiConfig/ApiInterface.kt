@@ -1,5 +1,6 @@
 package com.rndtechnosoft.bconn.ApiConfig
 
+import com.rndtechnosoft.bconn.Model.AddBusinessBody
 import com.rndtechnosoft.bconn.Model.AddMyAskBody
 import com.rndtechnosoft.bconn.Model.AddMyAskResponseData
 import com.rndtechnosoft.bconn.Model.AddMyGivesBody
@@ -9,6 +10,7 @@ import com.rndtechnosoft.bconn.Model.ChapterResponse
 import com.rndtechnosoft.bconn.Model.CityResponse
 import com.rndtechnosoft.bconn.Model.ContactLinksProfileBody
 import com.rndtechnosoft.bconn.Model.CountryResponse
+import com.rndtechnosoft.bconn.Model.DepartmentListResponseData
 import com.rndtechnosoft.bconn.Model.IndustryResponseData
 import com.rndtechnosoft.bconn.Model.LoginBody
 import com.rndtechnosoft.bconn.Model.LoginResponseData
@@ -88,10 +90,9 @@ interface ApiInterface {
         @Query("userId") userId: String?
     ): Call<MyAllMatchesResponseData>
 
-    @GET("myGives/getAllMyMatchs")
+    @GET("match2/myMatchesByCompanyAndDept")
     fun myMatchByCompany(
         @Header("authorization") authorization: String,
-        @Query("userId") userId: String?,
         @Query("companyName") companyName: String?,
         @Query("dept") department: String?
     ): Call<MyMatchByCompaniesResponseData>
@@ -121,8 +122,18 @@ interface ApiInterface {
         @Part("contactLinks[whatsapp]") whatsAppContactLink: RequestBody
     ): Call<ResponseBody>
 
+    //    http://bconn.rndtechnosoft.com/business/createProfile?user=66850d7492dc8ac40f9bb7b7
+    @POST("business/createProfile")
+    fun addBusiness(
+        @Header("authorization") authorization: String,
+        @Query("user") userId:String,
+        @Body addBusinessBody: AddBusinessBody
+    ): Call<ResponseBody>
+
     @GET("industry/getAllIndustry")
-    fun getAllIndustry(): Call<IndustryResponseData>
+    fun getAllIndustry(
+        @Header("authorization") authorization: String
+    ): Call<IndustryResponseData>
 
     @PUT("business/updateContactLinks")
     fun updateContactLinks(
@@ -133,7 +144,6 @@ interface ApiInterface {
     @GET("business/businesssList")
     fun businessList(@Header("authorization") authorization: String): Call<List<BusinessListResponseData>>
 
-    //https://bconn.rndtechnosoft.com/api/member/isMemberVerify?id=66f0f6b2da1d20441d068a42
     @GET("member/isMemberVerify")
     fun memberVerified(@Query("id") id: String): Call<MemberVerifiedResponseData>
 
@@ -148,8 +158,15 @@ interface ApiInterface {
 
     @PUT("member/updatememberById")
     fun updateMemberStatus(
-        @Query("id") id:String,
+        @Header("authorization") authorization: String,
+        @Query("id") id: String,
         @Body updateMemberStatusBody: UpdateMemberStatusBody
-    ):Call<UpdateMemberStatusResponseData>
+    ): Call<UpdateMemberStatusResponseData>
+
+
+    @GET("department/getAllDepartment")
+    fun getAllDepartment(
+        @Header("authorization") authorization: String
+    ):Call<DepartmentListResponseData>
 
 }

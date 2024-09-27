@@ -17,6 +17,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.rndtechnosoft.bconn.Activity.AddWorkActivity
 import com.rndtechnosoft.bconn.Activity.EditAboutMeActivity
 import com.rndtechnosoft.bconn.Activity.EditProfileContactDetailActivity
+import com.rndtechnosoft.bconn.Activity.ManageBusinessActivity
 import com.rndtechnosoft.bconn.Activity.ManageMembersActivity
 import com.rndtechnosoft.bconn.Adapter.BusinessListAdapter
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
@@ -55,10 +56,11 @@ class ProfileFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[ManageProfileViewModel::class.java]
 
-        binding.imgEditContactDetails.setOnClickListener {
+        val refCode:String? = SaveSharedPreference.getInstance(requireContext()).getReferralNumber()
+        binding.tvRefCode.setText("Referral Code: $refCode")
 
-            //startActivity(Intent(requireContext(), EditProfileContactDetailActivity::class.java))
-            startActivity(Intent(requireContext(), ManageMembersActivity::class.java))
+        binding.imgEditContactDetails.setOnClickListener {
+            startActivity(Intent(requireContext(), EditProfileContactDetailActivity::class.java))
         }
 
         binding.imgEditAboutMe.setOnClickListener {
@@ -88,11 +90,13 @@ class ProfileFragment : Fragment() {
         }
 
         binding.layoutAddWork.setOnClickListener {
-            startActivity(Intent(requireContext(), AddWorkActivity::class.java))
+            startActivity(Intent(requireContext(), ManageBusinessActivity::class.java))
         }
 
-        binding.rvBusinessList.layoutManager = LinearLayoutManager(requireContext())
-        businessList()
+
+        binding.layoutManageMembers.setOnClickListener {
+            startActivity(Intent(requireContext(), ManageMembersActivity::class.java))
+        }
 
         return binding.root
     }
@@ -159,7 +163,7 @@ class ProfileFragment : Fragment() {
     fun updateProfileImage(uriProfile: Uri?) {
 
         val token: String =
-            "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+            "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
 
         /* val imageProfileRequestBody: RequestBody? = uriProfile?.let { uri ->
              val imageBase64 = ImageUtil.convertImageToBase64(requireContext(), uri)
@@ -324,38 +328,5 @@ class ProfileFragment : Fragment() {
             })
     }
 
-    fun businessList() {
 
-        val token: String? = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
-
-        RetrofitInstance.apiInterface.businessList(token!!)
-            .enqueue(object : Callback<List<BusinessListResponseData>?> {
-                override fun onResponse(
-                    call: Call<List<BusinessListResponseData>?>,
-                    response: Response<List<BusinessListResponseData>?>
-                ) {
-                    if (response.isSuccessful) {
-
-                        val businessResponse = response.body()!!
-                        adapter = BusinessListAdapter(requireContext(),businessResponse)
-                        binding.rvBusinessList.adapter = adapter
-
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Response Error: ${response.code()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<List<BusinessListResponseData>?>, t: Throwable) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Error: ${t.localizedMessage}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-    }
 }

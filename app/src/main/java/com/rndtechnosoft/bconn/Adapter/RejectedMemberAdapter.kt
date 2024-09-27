@@ -8,7 +8,10 @@ import com.rndtechnosoft.bconn.Model.ReferralMemberData
 import com.rndtechnosoft.bconn.databinding.ItemRejectedMemberBinding
 
 
-class RejectedMemberAdapter (var context: Context, var rejectedMemberList: List<ReferralMemberData>) :
+class RejectedMemberAdapter(
+    var context: Context,
+    var rejectedMemberList: List<ReferralMemberData>
+) :
     RecyclerView.Adapter<RejectedMemberAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemRejectedMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -26,7 +29,13 @@ class RejectedMemberAdapter (var context: Context, var rejectedMemberList: List<
         holder.binding.tvName.text = memberData.name
         holder.binding.tvEmail.text = memberData.email
         holder.binding.tvMobile.text = memberData.mobile
-        holder.binding.tvStatus.text = memberData.approvedBymember
+
+        var status = memberData.approvedBymember
+        if (status == "cancel") {
+            status = "Cancel"
+        }
+
+        holder.binding.tvStatus.text = status
 
     }
 
