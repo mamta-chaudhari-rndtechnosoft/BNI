@@ -6,26 +6,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rndtechnosoft.bconn.Activity.CompanyActivity
-import com.rndtechnosoft.bconn.Model.BusinessListResponseData
+import com.rndtechnosoft.bconn.Model.BusinessListData
 import com.rndtechnosoft.bconn.databinding.ItemBusinessListBinding
 
 class BusinessListAdapter(
     private val context: Context,
-    private val businessList: List<BusinessListResponseData>
+    private val businessList: List<BusinessListData>
 ) : RecyclerView.Adapter<BusinessListAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemBusinessListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(businessData:BusinessListResponseData) {
+        fun bind(businessData: BusinessListData) {
             binding.layoutBusiness.setOnClickListener {
 
                 val intent: Intent = Intent(context, CompanyActivity::class.java)
-                //intent.putExtra("comanyId",)
+                intent.putExtra("companyId", businessData._id)
                 context.startActivity(intent)
             }
 
             binding.tvIndustry.text = businessData.industryName
-            binding.tvCompany.text =  businessData.companyName
+            binding.tvCompany.text = businessData.companyName
         }
     }
 
@@ -35,11 +35,11 @@ class BusinessListAdapter(
     }
 
     override fun getItemCount(): Int {
-      return businessList.size
+        return businessList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val businessListData  = businessList[position]
+        val businessListData = businessList[position]
         holder.bind(businessListData)
     }
 

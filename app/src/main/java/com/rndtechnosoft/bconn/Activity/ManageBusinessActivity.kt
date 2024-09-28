@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rndtechnosoft.bconn.Adapter.BusinessListAdapter
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
@@ -15,7 +12,6 @@ import com.rndtechnosoft.bconn.Model.BusinessListResponseData
 import com.rndtechnosoft.bconn.R
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
 import com.rndtechnosoft.bconn.databinding.ActivityManageBusinessBinding
-import com.rndtechnosoft.bconn.databinding.ActivityManageMembersBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,20 +49,22 @@ class ManageBusinessActivity : AppCompatActivity() {
 
     }
 
-    fun businessList() {
+   private fun businessList() {
 
         val token: String? = "Bearer " + SaveSharedPreference.getInstance(this@ManageBusinessActivity).getToken()
+        val userId:String? = SaveSharedPreference.getInstance(this@ManageBusinessActivity).getUserId()
 
-        RetrofitInstance.apiInterface.businessList(token!!)
-            .enqueue(object : Callback<List<BusinessListResponseData>?> {
+        RetrofitInstance.apiInterface.businessList(token!!,userId!!)
+            .enqueue(object : Callback<BusinessListResponseData?> {
                 override fun onResponse(
-                    call: Call<List<BusinessListResponseData>?>,
-                    response: Response<List<BusinessListResponseData>?>
+                    call: Call<BusinessListResponseData?>,
+                    response: Response<BusinessListResponseData?>
                 ) {
                     if (response.isSuccessful) {
                         binding.layoutProgressBar.visibility =  View.GONE
                         val businessResponse = response.body()!!
-                        adapter = BusinessListAdapter(this@ManageBusinessActivity,businessResponse)
+                        val businessList = businessResponse.data
+                        adapter = BusinessListAdapter(this@ManageBusinessActivity,businessList)
                         binding.rvBusinessList.adapter = adapter
 
                     } else {
@@ -79,7 +77,7 @@ class ManageBusinessActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<List<BusinessListResponseData>?>, t: Throwable) {
+                override fun onFailure(call: Call<BusinessListResponseData?>, t: Throwable) {
                     binding.layoutProgressBar.visibility =  View.GONE
                     Toast.makeText(
                         this@ManageBusinessActivity,

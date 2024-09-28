@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".Fragment.ProfileFragment">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
                     android:id="@+id/imgBanner"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="@color/light_blue"
+                    android:background="@drawable/banner_placeholder"
                     android:scaleType="centerCrop" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -60,7 +61,7 @@
                     android:layout_margin="8dp"
                     android:padding="1dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pic_test"
+                    android:src="@drawable/profile_placeholder"
                     app:shapeAppearance="@style/circle"
                     app:strokeColor="@color/white"
                     app:strokeWidth="1dp" />
@@ -92,9 +93,9 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="Ravi Shah"
+                    android:layout_weight="1"
+                    android:text="Name"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -103,16 +104,14 @@
                     android:id="@+id/tvRefCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="15dp"
-                    android:textAlignment="viewEnd"
+                    android:layout_weight="1"
                     android:text="Code"
+                    android:textAlignment="viewEnd"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    />
+                    android:textSize="18sp" />
 
             </LinearLayout>
-
 
 
             <com.google.android.material.button.MaterialButton
@@ -170,6 +169,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgNumber"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -184,6 +184,7 @@
                         app:tint="@color/white" />
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgEmail"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -204,11 +205,13 @@
                         android:padding="1dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/world_web_logo"
+                        android:visibility="gone"
                         app:shapeAppearance="@style/circle"
                         app:strokeColor="@color/white"
                         app:strokeWidth="1dp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgLinkedIn"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -226,11 +229,13 @@
                         android:padding="1dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/instagram_logo"
+                        android:visibility="gone"
                         app:shapeAppearance="@style/circle"
                         app:strokeColor="@color/white"
                         app:strokeWidth="1dp" />
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgFaceBook"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="8dp"
@@ -251,8 +256,8 @@
                 android:layout_marginTop="0dp"
                 android:background="#e1e1e1"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                android:paddingHorizontal="18dp">
+                android:paddingHorizontal="18dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -277,9 +282,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:visibility="gone"
                 android:text="@string/dummy_text"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone" />
 
 
             <LinearLayout
@@ -303,7 +308,6 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/layoutAddWork"
                 android:layout_width="match_parent"
@@ -322,13 +326,12 @@
                     android:padding="1dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/baseline_business_24"
+                    android:visibility="visible"
                     app:contentPadding="10dp"
                     app:shapeAppearance="@style/circle"
                     app:strokeColor="@color/white"
                     app:strokeWidth="1dp"
-                    app:tint="@color/black"
-                    android:visibility="visible"
-                    />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -340,7 +343,6 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -381,13 +383,12 @@
                     android:padding="1dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/baseline_people_outline_24"
+                    android:visibility="visible"
                     app:contentPadding="10dp"
                     app:shapeAppearance="@style/circle"
                     app:strokeColor="@color/white"
                     app:strokeWidth="1dp"
-                    app:tint="@color/black"
-                    android:visibility="visible"
-                    />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -438,13 +439,12 @@
                     android:padding="1dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/baseline_logout_24"
+                    android:visibility="visible"
                     app:contentPadding="10dp"
                     app:shapeAppearance="@style/circle"
                     app:strokeColor="@color/white"
                     app:strokeWidth="1dp"
-                    app:tint="@color/black"
-                    android:visibility="visible"
-                    />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -480,13 +480,12 @@
                     android:padding="1dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/baseline_delete_24"
+                    android:visibility="visible"
                     app:contentPadding="10dp"
                     app:shapeAppearance="@style/circle"
                     app:strokeColor="@color/white"
                     app:strokeWidth="1dp"
-                    app:tint="@color/black"
-                    android:visibility="visible"
-                    />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -498,6 +497,7 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -505,8 +505,6 @@
 
         </LinearLayout>
 
-
     </ScrollView>
-
 
 </LinearLayout>

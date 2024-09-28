@@ -5,9 +5,11 @@ import com.rndtechnosoft.bconn.Model.AddMyAskBody
 import com.rndtechnosoft.bconn.Model.AddMyAskResponseData
 import com.rndtechnosoft.bconn.Model.AddMyGivesBody
 import com.rndtechnosoft.bconn.Model.AddMyGivesResponseData
+import com.rndtechnosoft.bconn.Model.BusinessInfoResponseData
 import com.rndtechnosoft.bconn.Model.BusinessListResponseData
 import com.rndtechnosoft.bconn.Model.ChapterResponse
 import com.rndtechnosoft.bconn.Model.CityResponse
+import com.rndtechnosoft.bconn.Model.CompanyResponse
 import com.rndtechnosoft.bconn.Model.ContactLinksProfileBody
 import com.rndtechnosoft.bconn.Model.CountryResponse
 import com.rndtechnosoft.bconn.Model.DepartmentListResponseData
@@ -22,6 +24,7 @@ import com.rndtechnosoft.bconn.Model.MyMatchByCompaniesResponseData
 import com.rndtechnosoft.bconn.Model.ReferralMembersResponseData
 import com.rndtechnosoft.bconn.Model.RegisterResponseData
 import com.rndtechnosoft.bconn.Model.RegisterUserBody
+import com.rndtechnosoft.bconn.Model.USerInfoResponseData
 import com.rndtechnosoft.bconn.Model.UpdateMemberStatusBody
 import com.rndtechnosoft.bconn.Model.UpdateMemberStatusResponseData
 import com.rndtechnosoft.bconn.Model.UpdateProfileBannerImageResponseData
@@ -97,38 +100,104 @@ interface ApiInterface {
         @Query("dept") department: String?
     ): Call<MyMatchByCompaniesResponseData>
 
+    //update profile image
     @Multipart
-    @PUT("business/updateImg")
-    fun updateProfileImage(
+    @PUT("member/updatememberById")
+    fun updateProfileImageUser(
         @Header("authorization") authorization: String,
-        @Part("profileImg") profileImage: RequestBody?
+        @Query("id") userId: String?,
+        @Part image: MultipartBody.Part,
+    ): Call<UpdateProfileImageResponseData>
+
+    //update banner image
+    @Multipart
+    @PUT("member/updatememberById")
+    fun updateBannerUser(
+        @Header("authorization") authorization: String,
+        @Query("id") userId: String?,
+        @Part image: MultipartBody.Part,
+    ): Call<UpdateProfileBannerImageResponseData>
+
+    // Update user contact links
+    @Multipart
+    @PUT("member/updatememberById")
+    fun updateUserContactLinks(
+        @Header("authorization") authorization: String,
+        @Query("id") userId: String?,
+        @Part("name") name:RequestBody?,
+        @Part("mobile") number: RequestBody?,
+        @Part("email") email: RequestBody?,
+        @Part("facebook") facebook: RequestBody?,
+        @Part("linkedin") linkedin: RequestBody?,
+    ): Call<ResponseBody>
+
+
+    @Multipart
+    @PUT("business/updateBusinessById")
+    fun updateProfileImageBusiness(
+        @Header("authorization") authorization: String,
+        @Query("id") userId: String?,
+        @Part image: MultipartBody.Part,
     ): Call<UpdateProfileImageResponseData>
 
     @Multipart
     @PUT("business/updateBusinessById")
-    fun updateBanner(
+    fun updateBannerUserBusiness(
         @Header("authorization") authorization: String,
         @Query("id") userId: String?,
         @Part image: MultipartBody.Part,
     ): Call<UpdateProfileBannerImageResponseData>
 
     @Multipart
-    @POST("business/create")
-    fun createBusiness(
+    @PUT("business/updateBusinessById")
+    fun updateBusinessContactLinks(
         @Header("authorization") authorization: String,
-        @Part("designation") designation: RequestBody,
-        @Part("aboutCompany") aboutCompany: RequestBody,
-        @Part("companyAddress") companyAddress: RequestBody,
-        @Part("contactLinks[whatsapp]") whatsAppContactLink: RequestBody
+        @Query("id") userId: String?,
+        @Part("mobile") number: RequestBody?,
+        @Part("email") email: RequestBody?,
+        @Part("facebook") facebook: RequestBody?,
+        @Part("linkedin") linkedin: RequestBody?,
     ): Call<ResponseBody>
 
-    //    http://bconn.rndtechnosoft.com/business/createProfile?user=66850d7492dc8ac40f9bb7b7
+    @Multipart
+    @PUT("business/updateBusinessById")
+    fun updateBusinessDetails(
+        @Header("authorization") authorization: String,
+        @Query("id") userId: String?,
+        @Part("companyName") companyName: RequestBody?,
+        @Part("industryName") industryName: RequestBody?,
+        @Part("designation") designation: RequestBody?,
+        @Part("aboutCompany") aboutCompany: RequestBody?,
+        @Part("companyAddress") companyAddress: RequestBody?,
+    ): Call<ResponseBody>
+
+    @Multipart
+    @POST("business/createProfile")
+    fun createBusiness(
+        @Header("authorization") authorization: String,
+        @Query("userId") userId: String,
+        @Part("companyName") companyName: RequestBody,
+        @Part("email") companyEmail: RequestBody,
+        @Part("mobile") companyNumber: RequestBody,
+        @Part("industryName") industryName: RequestBody,
+        @Part("designation") designation: RequestBody,
+        @Part("companyAddress") companyAddress: RequestBody,
+        @Part("aboutCompany") aboutCompany: RequestBody
+    ): Call<ResponseBody>
+
+    //http://bconn.rndtechnosoft.com/business/createProfile?user=66850d7492dc8ac40f9bb7b7
     @POST("business/createProfile")
     fun addBusiness(
         @Header("authorization") authorization: String,
-        @Query("user") userId:String,
+        @Query("user") userId: String,
         @Body addBusinessBody: AddBusinessBody
     ): Call<ResponseBody>
+
+    @GET("business/getBusinessBymyId")
+    fun getBusinessInfo(
+        @Header("authorization") authorization: String,
+        @Query("id") businessId: String,
+    ): Call<BusinessInfoResponseData>
 
     @GET("industry/getAllIndustry")
     fun getAllIndustry(
@@ -141,8 +210,11 @@ interface ApiInterface {
         @Body contactLinksProfileBody: ContactLinksProfileBody
     ): Call<ResponseBody>
 
-    @GET("business/businesssList")
-    fun businessList(@Header("authorization") authorization: String): Call<List<BusinessListResponseData>>
+    @GET("business/getbusinessByuserId")
+    fun businessList(
+        @Header("authorization") authorization: String,
+        @Query("userId") businessId: String,
+    ): Call<BusinessListResponseData>
 
     @GET("member/isMemberVerify")
     fun memberVerified(@Query("id") id: String): Call<MemberVerifiedResponseData>
@@ -167,6 +239,25 @@ interface ApiInterface {
     @GET("department/getAllDepartment")
     fun getAllDepartment(
         @Header("authorization") authorization: String
-    ):Call<DepartmentListResponseData>
+    ): Call<DepartmentListResponseData>
 
+    @GET("member/getUserById")
+    fun getUserInfo(
+        @Header("authorization") authorization: String,
+        @Query("id") id: String
+    ): Call<USerInfoResponseData>
+
+    @GET("/api/company/getFilteredGives")
+    fun getFilteredGives(
+        @Header("Authorization") token: String,
+        @Query("companyName") companyName: String
+    ): Call<CompanyResponse>
+
+    @Multipart
+    @PUT("business/updateBusinessById")
+    fun addCatalogue(
+        @Header("authorization") authorization: String,
+        @Query("id") userId: String?,
+        @Part image: MultipartBody.Part,
+    ): Call<UpdateProfileBannerImageResponseData>
 }

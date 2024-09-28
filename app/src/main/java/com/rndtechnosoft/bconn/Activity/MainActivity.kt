@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        var token:String? = SaveSharedPreference.getInstance(this@MainActivity).getToken()
-        var userId:String? = SaveSharedPreference.getInstance(this@MainActivity).getUserId()
+        val token:String? = SaveSharedPreference.getInstance(this@MainActivity).getToken()
+        val userId:String? = SaveSharedPreference.getInstance(this@MainActivity).getUserId()
 
         //Toast.makeText(this@MainActivity,"token: $token  userId:$userId",Toast.LENGTH_SHORT).show()
 
@@ -100,10 +100,9 @@ class MainActivity : AppCompatActivity() {
                         //Toast.makeText(this, "Lat: $latitude, Long: $longitude", Toast.LENGTH_SHORT).show()
                     } else {
                         // Location is null, handle it
-                        Toast.makeText(this, "Unable to retrieve location", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Unable to retrieve location", Toast.LENGTH_SHORT).show()
                     }
-                }
-                .addOnFailureListener {
+                }.addOnFailureListener {
                     Toast.makeText(this, "Failed to get location", Toast.LENGTH_SHORT).show()
                 }
         } else {
@@ -143,11 +142,11 @@ class MainActivity : AppCompatActivity() {
                 )
             } else {
                 // Permission is already granted
-                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
             }
         } else {
             // For Android versions below 13, no need to check or request
-            Toast.makeText(this, "Notification permission not required below Android 13", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Notification permission not required below Android 13", Toast.LENGTH_SHORT).show()
         }
     }
 

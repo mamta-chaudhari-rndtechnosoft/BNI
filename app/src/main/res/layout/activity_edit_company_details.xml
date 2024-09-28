@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activity.EditProfileContactDetailActivity">
+    tools:context=".Activity.EditCompanyDetailsActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary_color"
-        app:title="Edit Contact Details"
+        app:title="Edit Details"
         app:titleTextAppearance="@style/toolbar_text"
         app:titleCentered="true"
         app:navigationIconTint="@color/white"
@@ -25,7 +25,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:layout_above="@id/btnUpdate"
-        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -38,19 +37,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginStart="22dp"
-                android:textColor="@color/primary_color"
                 android:layout_marginTop="10dp"
-                android:text="Name" />
+                android:textColor="@color/primary_color"
+                android:text="Company Name" />
 
             <EditText
-                android:id="@+id/etName"
+                android:id="@+id/etCompanyName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:background="@drawable/edittext_border"
-                android:drawableLeft="@drawable/baseline_person"
+                android:drawableLeft="@drawable/baseline_business_24"
                 android:drawablePadding="8dp"
-                android:hint="Enter Name"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter Company Name"
                 android:padding="15dp" />
 
             <TextView
@@ -58,21 +57,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginStart="22dp"
-                android:layout_marginTop="10dp"
                 android:textColor="@color/primary_color"
-                android:text="Phone Number" />
+                android:layout_marginTop="10dp"
+                android:text="Industry Category" />
 
-            <EditText
-                android:id="@+id/etPhoneNumber"
+            <Spinner
+                android:id="@+id/spinnerIndustry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/edittext_border"
-                android:drawableLeft="@drawable/outline_phone_24"
-                android:drawablePadding="8dp"
-                android:inputType="number"
-                android:maxLength="10"
-                android:hint="Enter Phone Number"
                 android:padding="15dp" />
 
 
@@ -84,18 +78,17 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/primary_color"
-                android:text="Email" />
+                android:text="Designation" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etDesignation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/outline_email_24"
+                android:drawableLeft="@drawable/baseline_designation_24"
                 android:drawablePadding="8dp"
                 android:background="@drawable/edittext_border"
-                android:hint="Enter Email"
+                android:hint="Enter Designation"
                 android:padding="15dp" />
 
             <TextView
@@ -105,40 +98,21 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/primary_color"
-                android:text="FaceBook Link" />
+                android:text="About Company" />
 
             <EditText
-                android:id="@+id/etFacebookLink"
+                android:id="@+id/etAboutCompany"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/edittext_border"
-                android:drawableLeft="@drawable/baseline_add_link_24"
+                android:drawableLeft="@drawable/baseline_business_24"
                 android:drawablePadding="8dp"
-                android:hint="Enter Facebook Link"
+                android:hint="Enter About Company"
+                android:inputType="textMultiLine"
                 android:padding="15dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:textColor="@color/primary_color"
-                android:text="Website Link" />
 
-            <EditText
-                android:id="@+id/etWebsiteLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:drawableLeft="@drawable/baseline_add_link_24"
-                android:drawablePadding="8dp"
-                android:visibility="gone"
-                android:background="@drawable/edittext_border"
-                android:hint="Enter Website Link"
-                android:padding="15dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -147,39 +121,17 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/primary_color"
-                android:text="LinkedIn Link" />
+                android:text="Company Address" />
 
             <EditText
-                android:id="@+id/etLinkedInLink"
+                android:id="@+id/etCompanyAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:drawableLeft="@drawable/baseline_add_link_24"
+                android:drawableLeft="@drawable/baseline_add_location_alt_24"
                 android:drawablePadding="8dp"
                 android:background="@drawable/edittext_border"
-                android:hint="Enter LinkedIn Profile Link"
-                android:padding="15dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/primary_color"
-                android:visibility="gone"
-                android:text="Instagram Link" />
-
-            <EditText
-                android:id="@+id/etInstagramLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:drawableLeft="@drawable/baseline_add_link_24"
-                android:drawablePadding="8dp"
-                android:background="@drawable/edittext_border"
-                android:hint="Enter Instagram Link"
-                android:visibility="gone"
+                android:hint="Enter Address"
                 android:padding="15dp" />
 
 
@@ -191,10 +143,10 @@
         android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="0dp"
         android:layout_marginTop="12dp"
         app:cornerRadius="0dp"
+        android:layout_alignParentBottom="true"
         android:text="@string/edit_details"
         android:textSize="18sp"
         android:textStyle="bold" />

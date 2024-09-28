@@ -1,6 +1,8 @@
 package com.rndtechnosoft.bconn.Fragment
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.PictureInPictureParams
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,28 +12,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.rndtechnosoft.bconn.Activity.AddWorkActivity
 import com.rndtechnosoft.bconn.Activity.EditAboutMeActivity
 import com.rndtechnosoft.bconn.Activity.EditProfileContactDetailActivity
+import com.rndtechnosoft.bconn.Activity.LoginActivity
 import com.rndtechnosoft.bconn.Activity.ManageBusinessActivity
 import com.rndtechnosoft.bconn.Activity.ManageMembersActivity
-import com.rndtechnosoft.bconn.Adapter.BusinessListAdapter
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
-import com.rndtechnosoft.bconn.Model.BusinessListResponseData
+import com.rndtechnosoft.bconn.Model.USerInfoResponseData
 import com.rndtechnosoft.bconn.Model.UpdateProfileBannerImageResponseData
+import com.rndtechnosoft.bconn.Model.UpdateProfileImageResponseData
+import com.rndtechnosoft.bconn.R
 import com.rndtechnosoft.bconn.Util.FileUtil
-import com.rndtechnosoft.bconn.Util.ImageUtil
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
-import com.rndtechnosoft.bconn.ViewModel.ManageProfileViewModel
 import com.rndtechnosoft.bconn.databinding.FragmentProfileBinding
+import com.squareup.picasso.Picasso
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,8 +41,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private var selectedBannerImageUri: Uri? = null
     private var selectedProfileImageUri: Uri? = null
-    private lateinit var viewModel: ManageProfileViewModel
-    private lateinit var adapter: BusinessListAdapter
+
 
     private val binding get() = _binding!!
 
@@ -54,9 +52,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(requireActivity())[ManageProfileViewModel::class.java]
-
-        val refCode:String? = SaveSharedPreference.getInstance(requireContext()).getReferralNumber()
+        val refCode: String? = SaveSharedPreference.getInstance(requireContext()).getReferralNumber()
         binding.tvRefCode.setText("Referral Code: $refCode")
 
         binding.imgEditContactDetails.setOnClickListener {
@@ -64,7 +60,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.imgEditAboutMe.setOnClickListener {
-            startActivity(Intent(requireContext(),EditAboutMeActivity::class.java))
+            startActivity(Intent(requireContext(), EditAboutMeActivity::class.java))
         }
 
         binding.addImgBanner.setOnClickListener {
@@ -97,6 +93,12 @@ class ProfileFragment : Fragment() {
         binding.layoutManageMembers.setOnClickListener {
             startActivity(Intent(requireContext(), ManageMembersActivity::class.java))
         }
+
+        binding.layoutLogOut.setOnClickListener {
+            logout()
+        }
+
+        getUserInfo()
 
         return binding.root
     }
@@ -162,92 +164,48 @@ class ProfileFragment : Fragment() {
 
     fun updateProfileImage(uriProfile: Uri?) {
 
-        val token: String =
-            "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        val token: String = "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
 
-        /* val imageProfileRequestBody: RequestBody? = uriProfile?.let { uri ->
-             val imageBase64 = ImageUtil.convertImageToBase64(requireContext(), uri)
-             //RequestBody.create(MediaType.parse("text/plain"), imageBase64)
-             RequestBody.create("text/plain".toMediaTypeOrNull(),imageBase64)
-         }*/
+        val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
 
-        val imageProfileRequestBody: RequestBody? = uriProfile?.let { uri ->
-            val imageBase64 = ImageUtil.convertImageToBase64(requireContext(), uri)
-            val prefixedImageBase64 = "data:image/png;base64,$imageBase64"
-            prefixedImageBase64!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val imageFile = FileUtil.getFileFromUri(requireContext(), uriProfile!!)
+        if (imageFile == null) {
+            Toast.makeText(requireContext(), "Failed to get image file", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        viewModel.updateProfileImage(token, imageProfileRequestBody!!)
+        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
+        val imagePart = MultipartBody.Part.createFormData("profileImg", imageFile.name, requestFile)
 
-        viewModel.observeUpdateProfileImage().observe(requireActivity(), Observer {
+        RetrofitInstance.apiInterface.updateProfileImageUser(token!!, userId, imagePart)
+            .enqueue(object : Callback<UpdateProfileImageResponseData?> {
+                override fun onResponse(
+                    call: Call<UpdateProfileImageResponseData?>,
+                    response: Response<UpdateProfileImageResponseData?>
+                ) {
+                    if (response.isSuccessful) {
 
-            when {
-                it.isSuccess -> {
-
-                    val profileResponse = it.getOrNull()!!
-                    val message: String = profileResponse.message
-                    Log.d("Api Response", "messageProfile: $message")
-                    Toast.makeText(
-                        requireContext(),
-                        "Profile Update Success: $message",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Response Error: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
-                it.isFailure -> {
-                    val error = it.exceptionOrNull()
-                    Log.d("Api Response", "Update Failed: ${error?.message.toString()}")
+                override fun onFailure(call: Call<UpdateProfileImageResponseData?>, t: Throwable) {
                     Toast.makeText(
                         requireContext(),
-                        "Profile Update failed",
+                        "Error: ${t.localizedMessage}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
+            })
 
-        })
+
     }
 
-    /* fun updateBannerImage(uriBanner:Uri?){
-         val token: String = "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
-
-         val imageBannerRequestBody: RequestBody? = uriBanner?.let { uri ->
-             val imageBase64 = ImageUtil.convertImageToBase64(requireContext(), uri)
-             val prefixedImageBase64 = "data:image/png;base64,$imageBase64"
-             prefixedImageBase64!!.toRequestBody("text/plain".toMediaTypeOrNull())
-         }
-
-         viewModel.updateBannerImage(token!!,imageBannerRequestBody!!)
-
-         viewModel.observeUpdateBannerImage().observe(requireActivity(), Observer {
-             when{
-                 it.isSuccess -> {
-
-                     val profileResponse = it.getOrNull()!!
-                     val message:String = profileResponse.message
-                     Log.d("Api Response","messageBanner: $message")
-                     Toast.makeText(
-                         requireContext(),
-                         "Banner Update Success: $message",
-                         Toast.LENGTH_SHORT
-                     ).show()
-
-
-                 }
-                 it.isFailure -> {
-                     val error = it.exceptionOrNull()
-                     Log.d("Api Response","Login Failed: ${error?.message.toString()}")
-                     Toast.makeText(
-                         requireContext(),
-                         "Profile Update failed",
-                         Toast.LENGTH_SHORT
-                     ).show()
-                 }
-             }
-
-         })
-     }*/
 
     private fun updateBannerImage(uriBanner: Uri?) {
 
@@ -257,9 +215,9 @@ class ProfileFragment : Fragment() {
         }
 
         val token: String? =
-            "bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+            "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
         //val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
-        val userId:String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
+        val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
         /*var prefixedImageBase64:String? = null
 
         val imageBannerRequestBody: RequestBody? = uriBanner?.let { uri ->
@@ -281,11 +239,9 @@ class ProfileFragment : Fragment() {
         }
 
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
-        val imagePart =
-            MultipartBody.Part.createFormData("bannerImg", imageFile.name, requestFile)
+        val imagePart = MultipartBody.Part.createFormData("bannerImg", imageFile.name, requestFile)
 
-
-        RetrofitInstance.apiInterface.updateBanner(token!!, userId, imagePart)
+        RetrofitInstance.apiInterface.updateBannerUser(token!!, userId, imagePart)
             .enqueue(object : Callback<UpdateProfileBannerImageResponseData?> {
                 override fun onResponse(
                     call: Call<UpdateProfileBannerImageResponseData?>,
@@ -310,8 +266,7 @@ class ProfileFragment : Fragment() {
                             "Response Error: ${call.request().url}",
                             Toast.LENGTH_SHORT
                         ).show()
-
-                        Log.d("Api Response","URL: ${call.request().url}")
+                        Log.d("Api Response", "URL: ${call.request().url}")
                     }
                 }
 
@@ -326,6 +281,103 @@ class ProfileFragment : Fragment() {
                     ).show()
                 }
             })
+    }
+
+    private fun getUserInfo() {
+
+        val token: String? =
+            "Bearer " + SaveSharedPreference.getInstance(requireContext()).getToken()
+        val userId: String? = SaveSharedPreference.getInstance(requireContext()).getUserId()
+
+        RetrofitInstance.apiInterface.getUserInfo(token!!, userId!!)
+            .enqueue(object : Callback<USerInfoResponseData?> {
+                override fun onResponse(
+                    call: Call<USerInfoResponseData?>,
+                    response: Response<USerInfoResponseData?>
+                ) {
+                    if (response.isSuccessful) {
+
+                        val userInfoResponseData = response.body()!!
+                        val userData = userInfoResponseData.data
+
+                        val name: String = userData.name
+                        val number: String = userData.mobile
+                        val email: String = userData.email
+                        val profileImage = userData.profileImg
+                        val bannerImage = userData.bannerImg
+
+
+                        val imgUrl = "https://bconn.rndtechnosoft.com/api/image/download/"
+                        val profile:String = imgUrl + profileImage
+                        val banner:String = imgUrl + bannerImage
+
+                        binding.tvName.setText(name)
+
+                        /*Picasso.get().load(profile).into(binding.imgProfile)
+                        Picasso.get().load(banner).into(binding.imgBanner)*/
+
+                        if(profileImage.isNullOrEmpty()){
+                            Picasso.get().load(R.drawable.profile_placeholder).into(binding.imgProfile)
+                        }
+                        else{
+                            Picasso.get().load(profile).into(binding.imgProfile)
+                        }
+
+                        if(bannerImage.isNullOrEmpty()){
+                            Picasso.get().load(R.drawable.banner_placeholder_two).into(binding.imgBanner)
+                        }else{
+                            Picasso.get().load(banner).into(binding.imgBanner)
+                        }
+
+
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Response Error: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<USerInfoResponseData?>, t: Throwable) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${t.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+
+    }
+
+    private fun logout() {
+
+        var appPreference = SaveSharedPreference.getInstance(requireContext())
+
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Confirm Logout")
+            .setMessage("Are you sure you want to log out?")
+            .setPositiveButton("Yes") { dialog, which ->
+
+                appPreference.clearUserId()
+                appPreference.clearToken()
+                appPreference.clearReferralNumber()
+
+                // Finish the current fragment
+                activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
+            }
+            .setNegativeButton("No") { dialog, which ->
+
+            }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
 

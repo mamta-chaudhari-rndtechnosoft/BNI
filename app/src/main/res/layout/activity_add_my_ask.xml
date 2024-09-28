@@ -54,7 +54,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <AutoCompleteTextView
+                android:id="@+id/autoTextCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Company"
+                android:visibility="gone"
+                android:drawableLeft="@drawable/baseline_business_24"
+                android:drawablePadding="8dp"
+                android:background="@drawable/spinner_border_material"
+                android:padding="15dp"
+                />
+
+           <!-- <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etDepartment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +83,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <Spinner
+                android:id="@+id/spinnerDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/white"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_border_material"
+                android:padding="15dp"
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etMessage"

@@ -89,12 +89,31 @@ class LoginActivity : AppCompatActivity() {
                         finish()
 
                     } else {
-                        binding.layoutProgressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Response Error: ${response.code()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+                        if(response.code() == 400){
+                            binding.layoutProgressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Your Verification is Pending",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        else if(response.code() == 404){
+                            binding.layoutProgressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "You are not a registered member",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        else{
+                            binding.layoutProgressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Response Error: ${response.code()}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
 

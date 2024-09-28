@@ -6,12 +6,15 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.R
+import android.view.View
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
 import com.rndtechnosoft.bconn.Model.AddBusinessBody
 import com.rndtechnosoft.bconn.Model.IndustryData
 import com.rndtechnosoft.bconn.Model.IndustryResponseData
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
 import com.rndtechnosoft.bconn.databinding.ActivityAddWorkBinding
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,8 +25,6 @@ class AddWorkActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddWorkBinding
 
-    //private lateinit var viewModel: BusinessViewModel
-    //private lateinit var industryNames: List<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWorkBinding.inflate(layoutInflater)
@@ -31,7 +32,9 @@ class AddWorkActivity : AppCompatActivity() {
 
 
         binding.btnAddWork.setOnClickListener {
-            //Validation Pending
+            //Validation Pending as not confirm yet
+
+            binding.layoutProgressBar.visibility = View.VISIBLE
             addBusiness()
         }
 
@@ -50,61 +53,76 @@ class AddWorkActivity : AppCompatActivity() {
         val userId: String = SaveSharedPreference.getInstance(this@AddWorkActivity).getUserId()!!
 
         val companyName: String = binding.etCompanyName.text.toString()
+        val companyNumber:String = binding.etCompanyNumber.text.toString()
+        val companyEmail:String = binding.etCompanyEmail.text.toString()
         val companyIndustry: String = binding.spinnerIndustry.selectedItem.toString()
         val personDesignation: String = binding.etDesignation.text.toString()
         val companyAddress: String = binding.etCompanyAddress.text.toString()
         val aboutCompany: String = binding.etAboutCompany.text.toString()
-        val whatsApp: String = binding.etWhatsAppLink.text.toString()
+        //val whatsApp: String = binding.etWhatsAppLink.text.toString()
 
-        /*val cName = RequestBody.create("text/plain".toMediaTypeOrNull(), companyName)
+        val cName = RequestBody.create("text/plain".toMediaTypeOrNull(), companyName)
+        val cNumber = RequestBody.create("text/plain".toMediaTypeOrNull(),companyNumber)
+        val cEmail = RequestBody.create("text/plain".toMediaTypeOrNull(),companyEmail)
         val cIndustry = RequestBody.create("text/plain".toMediaTypeOrNull(), companyIndustry)
         val designation = RequestBody.create("text/plain".toMediaTypeOrNull(), personDesignation)
         val address = RequestBody.create("text/plain".toMediaTypeOrNull(), companyAddress)
         val about = RequestBody.create("text/plain".toMediaTypeOrNull(), aboutCompany)
-        val whatsAppLink = RequestBody.create("text/plain".toMediaTypeOrNull(), whatsApp)*/
+        //val whatsAppLink = RequestBody.create("text/plain".toMediaTypeOrNull(), whatsApp)
 
-        val addBusinessBody = AddBusinessBody(
+        /*val addBusinessBody = AddBusinessBody(
             companyName,
             companyIndustry,
             personDesignation,
             companyAddress,
-            aboutCompany,
-            whatsApp
-        )
+            aboutCompany
+        )*/
 
-        RetrofitInstance.apiInterface.addBusiness(token!!, userId, addBusinessBody)
-            .enqueue(object : Callback<ResponseBody?> {
-            override fun onResponse(
-                call: Call<ResponseBody?>,
-                response: Response<ResponseBody?>
-            ) {
-                if (response.isSuccessful) {
+        RetrofitInstance.apiInterface.createBusiness(
+            token!!,
+            userId,
+            cName,
+            cEmail,
+            cNumber,
+            cIndustry,
+            designation,
+            address,
+            about
+        ).enqueue(object : Callback<ResponseBody?> {
+                override fun onResponse(
+                    call: Call<ResponseBody?>,
+                    response: Response<ResponseBody?>
+                ) {
+                    if (response.isSuccessful) {
+                        binding.layoutProgressBar.visibility = View.GONE
+                        Toast.makeText(
+                            this@AddWorkActivity,
+                            "Business Created Successfully.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
 
+                    } else {
+                        binding.layoutProgressBar.visibility = View.GONE
+                        Log.d("Api Response", "Response Error: ${response.code()}")
+                        Toast.makeText(
+                            this@AddWorkActivity,
+                            "Response Error: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                    binding.layoutProgressBar.visibility = View.GONE
+                    Log.d("Api Response", "Error: ${t.localizedMessage}")
                     Toast.makeText(
                         this@AddWorkActivity,
-                        "Success: ${response.code()}",
-                        Toast.LENGTH_SHORT).show()
-
-                } else {
-                    Log.d("Api Response", "Response Error: ${response.code()}")
-                    Toast.makeText(
-                        this@AddWorkActivity,
-                        "Response Error: ${response.code()}",
+                        "Error: ${t.localizedMessage}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
-
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                Log.d("Api Response", "Error: ${t.localizedMessage}")
-                Toast.makeText(
-                    this@AddWorkActivity,
-                    "Error: ${t.localizedMessage}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-
+            })
     }
 
 
