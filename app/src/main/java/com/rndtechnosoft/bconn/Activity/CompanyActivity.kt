@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.rndtechnosoft.bconn.ApiConfig.RetrofitInstance
+import com.rndtechnosoft.bconn.Model.AddCatalogResponseData
 import com.rndtechnosoft.bconn.Model.BusinessInfoResponseData
 import com.rndtechnosoft.bconn.Model.UpdateProfileBannerImageResponseData
 import com.rndtechnosoft.bconn.Model.UpdateProfileImageResponseData
@@ -24,11 +25,17 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class CompanyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCompanyBinding
     private var selectedBannerImageUri: Uri? = null
     private var selectedProfileImageUri: Uri? = null
+    private var catalogUrl: String? = null
+
+    companion object {
+        const val PDF_REQUEST_CODE = 30
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,15 +68,36 @@ class CompanyActivity : AppCompatActivity() {
 
         val businessId: String? = intent.getStringExtra("companyId")
         binding.imgEditContactDetails.setOnClickListener {
-            val intent = Intent(this@CompanyActivity,EditCompanyContactDetailsActivity::class.java)
-            intent.putExtra("businessId",businessId)
+            val intent = Intent(this@CompanyActivity, EditCompanyContactDetailsActivity::class.java)
+            intent.putExtra("businessId", businessId)
             startActivity(intent)
         }
 
         binding.imgEditCompanyDetails.setOnClickListener {
-            val intent = Intent(this@CompanyActivity,EditCompanyDetailsActivity::class.java)
-            intent.putExtra("businessId",businessId)
+            val intent = Intent(this@CompanyActivity, EditCompanyDetailsActivity::class.java)
+            intent.putExtra("businessId", businessId)
             startActivity(intent)
+        }
+
+        binding.layoutAddCatalog.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "application/pdf"
+                addCategory(Intent.CATEGORY_OPENABLE)
+            }
+            startActivityForResult(Intent.createChooser(intent, "Select PDF"), PDF_REQUEST_CODE)
+        }
+
+        binding.layoutViewCatalog.setOnClickListener {
+
+            if(catalogUrl.isNullOrEmpty()){
+                Toast.makeText(this@CompanyActivity,"No Catalog is added.",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(catalogUrl)
+                startActivity(intent)
+            }
+
         }
 
     }
@@ -109,6 +137,23 @@ class CompanyActivity : AppCompatActivity() {
                             "Image Not Selected",
                             Toast.LENGTH_SHORT
                         ).show()
+                    }
+                }
+
+                PDF_REQUEST_CODE -> { // Handle PDF File
+                    val pdfUri: Uri? = data?.data
+                    if (pdfUri != null) {
+                        val pdfFile = FileUtil.getFileFromUri(this@CompanyActivity, pdfUri)
+                        if (pdfFile != null) {
+                            binding.layoutProgressBar.visibility = View.VISIBLE
+                            uploadPdfFile(pdfFile)
+                        } else {
+                            Toast.makeText(
+                                this@CompanyActivity,
+                                "Failed to get PDF file",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
 
@@ -237,7 +282,8 @@ class CompanyActivity : AppCompatActivity() {
 
     private fun getBusinessInfo() {
 
-        val token: String? = "Bearer " + SaveSharedPreference.getInstance(this@CompanyActivity).getToken()
+        val token: String? =
+            "Bearer " + SaveSharedPreference.getInstance(this@CompanyActivity).getToken()
 
         val businessId: String? = intent.getStringExtra("companyId")
 
@@ -260,10 +306,13 @@ class CompanyActivity : AppCompatActivity() {
                         val address = businessData.companyAddress
                         val profileImage = businessData.profileImg
                         val bannerImage = businessData.bannerImg
+                        val catalog = businessData.catalog
 
                         val imgUrl = "https://bconn.rndtechnosoft.com/api/image/download/"
                         val profile: String = imgUrl + profileImage
                         val banner: String = imgUrl + bannerImage
+
+                        val pdfUrl = "https://bconn.rndtechnosoft.com/api/pdf/download/"
 
                         binding.tvCompanyName.text = companyName
                         binding.tvIndustry.text = industryName
@@ -271,20 +320,24 @@ class CompanyActivity : AppCompatActivity() {
                         binding.tvAboutCompany.text = aboutCompany
                         binding.tvAddress.text = address
 
-                        if(profileImage.isNullOrEmpty()){
-                            Picasso.get().load(R.drawable.profile_placeholder).into(binding.imgProfile)
-                        }
-                        else{
+                        if (profileImage.isNullOrEmpty()) {
+                            Picasso.get().load(R.drawable.profile_placeholder)
+                                .into(binding.imgProfile)
+                        } else {
                             Picasso.get().load(profile).into(binding.imgProfile)
                         }
 
-                        if(bannerImage.isNullOrEmpty()){
-                            Picasso.get().load(R.drawable.banner_placeholder_two).into(binding.imgBanner)
-                        }else{
+                        if (bannerImage.isNullOrEmpty()) {
+                            Picasso.get().load(R.drawable.banner_placeholder_two)
+                                .into(binding.imgBanner)
+                        } else {
                             Picasso.get().load(banner).into(binding.imgBanner)
                         }
 
-
+                        if (!catalog.isNullOrEmpty()) {
+                            //binding.layoutViewCatalog.visibility = View.GONE
+                            catalogUrl = pdfUrl + catalog
+                        }
 
 
                     } else {
@@ -308,4 +361,56 @@ class CompanyActivity : AppCompatActivity() {
             })
 
     }
+
+    private fun uploadPdfFile(pdfFile: File) {
+        val token: String? =
+            "Bearer " + SaveSharedPreference.getInstance(this@CompanyActivity).getToken()
+
+        val businessId: String? = intent.getStringExtra("companyId")
+
+        val requestFile = RequestBody.create("application/pdf".toMediaTypeOrNull(), pdfFile)
+        val pdfPart = MultipartBody.Part.createFormData("catalog", pdfFile.name, requestFile)
+
+
+        RetrofitInstance.apiInterface.addCatalogue(token!!, businessId, pdfPart)
+            .enqueue(object : Callback<AddCatalogResponseData?> {
+                override fun onResponse(
+                    call: Call<AddCatalogResponseData?>,
+                    response: Response<AddCatalogResponseData?>
+                ) {
+                    if (response.isSuccessful) {
+                        binding.layoutProgressBar.visibility = View.GONE
+
+                        var responseData = response.body()!!
+                        var catalogId: String = responseData.updatedFields.catalog
+
+                        Log.d("Api Response", "Catalog: $catalogId")
+
+                        Toast.makeText(
+                            this@CompanyActivity,
+                            "Catalog Added Successfully.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+                        binding.layoutProgressBar.visibility = View.GONE
+                        Toast.makeText(
+                            this@CompanyActivity,
+                            "Response Error: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<AddCatalogResponseData?>, t: Throwable) {
+                    binding.layoutProgressBar.visibility = View.GONE
+                    Toast.makeText(
+                        this@CompanyActivity,
+                        "Error: ${t.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.rndtechnosoft.bconn.ApiConfig
 
 import com.rndtechnosoft.bconn.Model.AddBusinessBody
+import com.rndtechnosoft.bconn.Model.AddCatalogResponseData
 import com.rndtechnosoft.bconn.Model.AddMyAskBody
 import com.rndtechnosoft.bconn.Model.AddMyAskResponseData
 import com.rndtechnosoft.bconn.Model.AddMyGivesBody
@@ -258,6 +259,9 @@ interface ApiInterface {
     fun addCatalogue(
         @Header("authorization") authorization: String,
         @Query("id") userId: String?,
-        @Part image: MultipartBody.Part,
-    ): Call<UpdateProfileBannerImageResponseData>
+        @Part filePdf: MultipartBody.Part,
+    ): Call<AddCatalogResponseData>
+
+
+
 }
