@@ -24,6 +24,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OnBoardActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.EditCompanyDetailsActivity"
             android:exported="false" />
         <activity

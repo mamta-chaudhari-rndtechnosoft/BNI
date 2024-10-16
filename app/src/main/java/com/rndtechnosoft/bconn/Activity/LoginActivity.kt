@@ -11,6 +11,7 @@ import com.rndtechnosoft.bconn.Model.LoginBody
 import com.rndtechnosoft.bconn.Model.LoginResponseData
 import com.rndtechnosoft.bconn.databinding.ActivityLoginBinding
 import com.google.firebase.messaging.FirebaseMessaging
+import com.rndtechnosoft.bconn.ForgotPasswordActivity
 import com.rndtechnosoft.bconn.Util.SaveSharedPreference
 import com.rndtechnosoft.bconn.databinding.ActivityRegistrationBinding
 import retrofit2.Call
@@ -31,8 +32,13 @@ class LoginActivity : AppCompatActivity() {
         binding.tvSignUp.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegistrationActivity::class.java))
         }
+
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+        }
+
         val userId: String? = SaveSharedPreference.getInstance(this@LoginActivity).getUserId()
-        Toast.makeText(this@LoginActivity,"Id: $userId",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@LoginActivity, "Id: $userId", Toast.LENGTH_SHORT).show()
 
         binding.btnLogin.setOnClickListener {
 
@@ -79,34 +85,42 @@ class LoginActivity : AppCompatActivity() {
                         //Toast.makeText(this@LoginActivity, "Success", Toast.LENGTH_SHORT).show()
                         SaveSharedPreference.getInstance(this@LoginActivity).saveUserId(userId)
                         SaveSharedPreference.getInstance(this@LoginActivity).saveToken(token)
-                        SaveSharedPreference.getInstance(this@LoginActivity).saveReferralNumber(referralNumber)
+                        SaveSharedPreference.getInstance(this@LoginActivity)
+                            .saveReferralNumber(referralNumber)
 
-                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
+                            .show()
 
                         val intent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         finish()
 
                     } else {
 
-                        if(response.code() == 400){
+                        if (response.code() == 400) {
                             binding.layoutProgressBar.visibility = View.GONE
                             Toast.makeText(
                                 this@LoginActivity,
                                 "Your Verification is Pending",
                                 Toast.LENGTH_SHORT
                             ).show()
-                        }
-                        else if(response.code() == 404){
+                        } else if (response.code() == 404) {
                             binding.layoutProgressBar.visibility = View.GONE
                             Toast.makeText(
                                 this@LoginActivity,
                                 "You are not a registered member",
                                 Toast.LENGTH_SHORT
                             ).show()
-                        }
-                        else{
+                        } else if (response.code() == 401) {
+                            binding.layoutProgressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Invalid Crendentials.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
                             binding.layoutProgressBar.visibility = View.GONE
                             Toast.makeText(
                                 this@LoginActivity,
