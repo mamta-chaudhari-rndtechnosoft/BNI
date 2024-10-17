@@ -4,17 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".Fragment.MyMatchFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarMyMatch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color"
+        android:background="@color/light_red"
         app:titleTextAppearance="@style/toolbar_text"
         app:title="My Matches"
         app:titleCentered="true"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/primary_color" />
+
+    <View
+        android:id="@+id/viewToolbarLine"
+        android:background="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/toolbarMyMatch"
+        />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeMyAsks"

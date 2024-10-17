@@ -12,13 +12,21 @@
         android:id="@+id/toolbarAddMyGives"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color"
+        android:background="@color/light_red"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
-        app:navigationIconTint="@color/white"
+        app:navigationIconTint="@color/primary_color"
         app:titleTextAppearance="@style/toolbar_text"
         app:title="Add My Gives"
         app:titleCentered="true"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/primary_color" />
+
+    <View
+        android:id="@+id/viewToolbarLine"
+        android:background="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/toolbarAddMyGives"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +53,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="16dp"
                     android:hint="Company"
-                    app:boxBackgroundColor="@color/light_red"
+                    app:boxBackgroundColor="@color/white"
                     app:startIconDrawable="@drawable/baseline_business_24"
                     app:startIconTint="@color/black">
 
@@ -90,7 +98,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="16dp"
                     android:hint="Email"
-                    app:boxBackgroundColor="@color/light_red"
+                    app:boxBackgroundColor="@color/white"
                     app:startIconDrawable="@drawable/baseline_email"
                     app:startIconTint="@color/black">
 
@@ -108,7 +116,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="16dp"
                     android:hint="Mobile"
-                    app:boxBackgroundColor="@color/light_red"
+                    app:boxBackgroundColor="@color/white"
                     app:startIconDrawable="@drawable/outline_phone_24"
                     app:startIconTint="@color/black">
 
@@ -127,7 +135,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="16dp"
                     android:hint="@string/web_url"
-                    app:boxBackgroundColor="@color/light_red"
+                    app:boxBackgroundColor="@color/white"
                     app:startIconDrawable="@drawable/baseline_insert_link_24"
                     app:startIconTint="@color/black">
 

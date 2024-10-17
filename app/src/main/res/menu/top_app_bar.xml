@@ -10,7 +10,7 @@
         android:icon="@drawable/baseline_add_circle_"
         android:title="@string/my_asks"
         android:contentDescription="@string/my_asks"
-        android:iconTint="@color/white"
+        android:iconTint="@color/primary_color"
         app:showAsAction="ifRoom" />
 
 

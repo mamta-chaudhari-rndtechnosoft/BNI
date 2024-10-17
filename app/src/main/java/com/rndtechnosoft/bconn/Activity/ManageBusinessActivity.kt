@@ -35,6 +35,10 @@ class ManageBusinessActivity : AppCompatActivity() {
             }
         }
 
+        binding.topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
         binding.rvBusinessList.layoutManager = LinearLayoutManager(this)
 
         binding.layoutProgressBar.visibility =  View.VISIBLE

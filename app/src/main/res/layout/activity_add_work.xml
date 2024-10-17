@@ -12,13 +12,21 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color"
+        android:background="@color/light_red"
         app:title="Add Business"
         app:titleCentered="true"
         app:titleTextAppearance="@style/toolbar_text"
-        app:navigationIconTint="@color/white"
+        app:navigationIconTint="@color/primary_color"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/primary_color" />
+
+    <View
+        android:id="@+id/viewToolbarLine"
+        android:background="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/toolbar"
+        />
 
 
     <ScrollView

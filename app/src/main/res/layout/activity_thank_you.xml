@@ -45,7 +45,7 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/shake_hands" />
+                    android:src="@drawable/thank_you_success" />
 
                 <TextView
                     android:id="@+id/tvThankYou"
@@ -53,33 +53,64 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Thank You"
+                    android:text="Thankyou for the \nRegistrastion"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+                    android:textSize="35sp"
                     android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="20dp"
+                            android:text="We've received your Registration request, and our team is reviewing your Details."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                             />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Once Approved, you'll receive  an Email confirming your access to the platform."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Your request has been submitted successfully. "
+                    android:layout_marginTop="10dp"
+                    android:text="Please Wait until we Approve Your Request"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp"
+                    />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Your request is currently under review. Please await further updates."
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
 
             </LinearLayout>
 

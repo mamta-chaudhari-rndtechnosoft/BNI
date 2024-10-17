@@ -11,13 +11,21 @@
         android:id="@+id/toolbarEditAboutMe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color"
+        android:background="@color/light_red"
         app:titleTextAppearance="@style/toolbar_text"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
-        app:navigationIconTint="@color/white"
+        app:navigationIconTint="@color/primary_color"
         app:title="Edit About Me"
         app:titleCentered="true"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/primary_color" />
+    <View
+        android:id="@+id/viewToolbarLine"
+        android:background="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/toolbarEditAboutMe"
+        />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="About Me"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/black"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp"
                 />
@@ -42,7 +50,7 @@
                 android:id="@+id/etAboutMe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
+                android:background="@drawable/update_edittext_border"
                 android:padding="15dp"
                 android:hint="Enter About Me"
                 android:drawableLeft="@drawable/baseline_person"

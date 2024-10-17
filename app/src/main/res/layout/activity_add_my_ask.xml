@@ -13,13 +13,21 @@
         android:id="@+id/toolbarAddMyAsk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color"
+        android:background="@color/light_red"
         app:navigationIcon="@drawable/outline_arrow_circle_left_"
-        app:navigationIconTint="@color/white"
+        app:navigationIconTint="@color/primary_color"
         app:title="Add My Ask"
         app:titleCentered="true"
         app:titleTextAppearance="@style/toolbar_text"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/primary_color"
+        />
+    <View
+        android:id="@+id/viewToolbarLine"
+        android:background="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/toolbarAddMyAsk"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +52,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
                 android:hint="Company"
-                app:boxBackgroundColor="@color/light_red"
+                app:boxBackgroundColor="@color/white"
                 app:startIconDrawable="@drawable/baseline_business_24"
                 app:startIconTint="@color/black">
 
@@ -103,7 +111,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:hint="Message"
-                app:boxBackgroundColor="@color/light_red"
+                app:boxBackgroundColor="@color/white"
                 app:startIconDrawable="@drawable/baseline_message_24"
                 app:startIconTint="@color/black">
 
